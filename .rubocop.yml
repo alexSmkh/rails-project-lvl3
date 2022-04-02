@@ -37,3 +37,6 @@ Metrics/BlockLength:
 
 Style/AsciiComments:
   Enabled: false
+
+Rails/FilePath:
+  Enabled: false

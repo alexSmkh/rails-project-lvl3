@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.26'
   gem 'rubocop-performance', '~> 1.13'
   gem 'rubocop-rails', '~> 2.13'
+  gem 'slim_lint', '~> 0.22.1'
 end
 
 group :development do
@@ -61,3 +62,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'rollbar', '~> 3.3'
+
+gem 'slim', '~> 4.1'
