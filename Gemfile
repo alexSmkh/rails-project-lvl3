@@ -22,6 +22,7 @@ gem 'webpacker', '~> 5.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'faker'
   gem 'prettier', '~> 2.0'
   gem 'rubocop', '~> 1.26'
   gem 'rubocop-performance', '~> 1.13'
