@@ -8,5 +8,38 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    = yield
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+
+  body.d-flex.flex-column.vh-100.body-bg
+    - if flash[:notice].present?
+        .alert.alert-primary.alert-dismissible.fade.show role='alert'
+          = sanitize build_flash(notice)
+          button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
+
+    - if flash[:alert].present?
+        .alert.alert-danger.alert-dismissible.fade.show role='alert'
+          = sanitize build_flash(alert)
+          button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
+
+    header.container
+      nav.d-flex.justify-content-between.align-items-center.py-2.px-4
+        = link_to root_path, class: 'fs-3' do
+          i.fa-solid.fa-house
+        - if signed_in?
+          = link_to auth_path, method: :delete,
+                                  data: { confirmation: t('messages.are_you_shure') },
+                                  class: 'fs-5 link-color text-decoration-none' do
+            i.fa-solid.fa-arrow-right-from-bracket.me-2
+            span = t('sign_out')
+
+        - else
+          = link_to new_auth_path, class: 'fs-5 link-color text-decoration-none' do
+            i.fa-solid.fa-arrow-right-to-bracket.me-2
+            span = t('sign_in')
+
+    main.flex-grow-1.container.my-2
+      = yield
+
+    footer.footer.mt-auto.py-3.container.text-center
+        = link_to 'https://github.com/alexSmkh/rails-project-lvl3', class: 'fs-4' do
+          i.fa-brands.fa-github
