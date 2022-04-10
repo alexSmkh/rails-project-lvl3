@@ -1,0 +1,13 @@
+.col-sm-6.col-lg-4.col-xl-3.mb-4
+  .card.x-card-hover.border.rounded.h-100
+    = image_tag bulletin.image,
+                width: '100%',
+                class: 'card-img-top rounded-top',
+                style: 'height: 200px; object-fit: cover;'
+    .card-body
+      .card-title
+        = link_to bulletin.name, bulletin_path(bulletin), class: 'x-text-underline-hover fw-bolder'
+      p.card-text = truncate(bulletin.description, length: 100)
+    .card-footer.text-center.align-middle
+      p.x-fs-8.mb-0.text-secondary
+        = posted_by(bulletin)

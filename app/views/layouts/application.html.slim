@@ -10,7 +10,7 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
-  body.d-flex.flex-column.vh-100.body-bg
+  body.d-flex.flex-column.vh-100
     - if flash[:notice].present?
         .alert.alert-primary.alert-dismissible.fade.show role='alert'
           = sanitize build_flash(notice)
@@ -28,18 +28,18 @@ html
         - if signed_in?
           = link_to auth_path, method: :delete,
                                   data: { confirmation: t('messages.are_you_shure') },
-                                  class: 'fs-5 link-color text-decoration-none' do
+                                  class: 'fs-5 text-decoration-none' do
             i.fa-solid.fa-arrow-right-from-bracket.me-2
             span = t('sign_out')
 
         - else
-          = link_to new_auth_path, class: 'fs-5 link-color text-decoration-none' do
+          = link_to new_auth_path, class: 'fs-5 text-decoration-none' do
             i.fa-solid.fa-arrow-right-to-bracket.me-2
             span = t('sign_in')
 
-    main.flex-grow-1.container.my-2
+    main.flex-grow-1.my-2.container
       = yield
 
-    footer.footer.mt-auto.py-3.container.text-center
+    footer.footer.mt-auto.py-2.container.text-center
         = link_to 'https://github.com/alexSmkh/rails-project-lvl3', class: 'fs-4' do
           i.fa-brands.fa-github

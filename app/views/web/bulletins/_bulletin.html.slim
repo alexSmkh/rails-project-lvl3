@@ -1,0 +1,16 @@
+.border-bottom.mb-4
+  .row.mb-2
+    .col
+      = link_to bulletin.category.name,
+                '#',
+                class: 'fs-5 text-body x-text-underline-hover'
+  .row.mb-2
+    .col
+      h1.mb-0.fs-2 = bulletin.name.capitalize
+  .row
+    .col.fs-6.fw-light.text-muted
+      p = posted_by(bulletin)
+.row.mb-5
+  .col.col-lg-8.col-xl-6.rounded.shadow.p-3
+    = image_tag bulletin.image, width: '100%', class: 'rounded'
+p = bulletin.description

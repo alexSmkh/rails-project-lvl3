@@ -1,0 +1,7 @@
+en:
+  web:
+    bulletins:
+      new:
+        title: New Bulletin
+      edit:
+        title: Editing Bulletin

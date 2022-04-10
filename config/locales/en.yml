@@ -1,7 +1,16 @@
 en:
-  sign_in: 'Sign in'
-  sign_in_with: 'Sign in with'
-  sign_out: 'Sign out'
+  back: Back
+  bulletins: Bulletins
+  sign_in: Sign in
+  sign_in_with: Sign in with
+  sign_out: Sign out
+  show: Show
+  posted_by: Posted by
+
+  helpers:
+    submit:
+      create: Create
+      edit: Edit
 
   messages:
     are_you_shure: 'Are you sure?'
