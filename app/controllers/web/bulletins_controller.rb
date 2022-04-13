@@ -23,7 +23,7 @@ class Web::BulletinsController < Web::ApplicationController
       if @bulletin.save
         format.html do
           redirect_to bulletin_url(@bulletin),
-                      notice: 'Bulletin was successfully created.'
+                      notice: t('.successfully_created')
         end
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class Web::BulletinsController < Web::ApplicationController
       if @bulletin.update(bulletin_params)
         format.html do
           redirect_to bulletin_url(@bulletin),
-                      notice: 'Bulletin was successfully updated.'
+                      notice: t('.successfully_updated')
         end
         format.json { render :show, status: :ok, location: @bulletin }
       else
@@ -64,7 +64,7 @@ class Web::BulletinsController < Web::ApplicationController
     respond_to do |format|
       format.html do
         redirect_to bulletins_url,
-                    notice: 'Bulletin was successfully destroyed.'
+                    notice: t('.successfully_destroyed')
       end
       format.json { head :no_content }
     end

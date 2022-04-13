@@ -3,5 +3,11 @@ en:
     bulletins:
       new:
         title: New Bulletin
+      create:
+        successfully_created: Bulletin was successfully created
       edit:
         title: Editing Bulletin
+      update:
+        successfully_updated: Bulletin was successfully updated
+      destroy:
+        successfully_destroyed: Bulletin was successfully destroyed
