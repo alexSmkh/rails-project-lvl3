@@ -6,7 +6,7 @@
                 style: 'height: 200px; object-fit: cover;'
     .card-body
       .card-title
-        = link_to bulletin.name, bulletin_path(bulletin), class: 'x-text-underline-hover fw-bolder'
+        = link_to bulletin.title, bulletin_path(bulletin), class: 'x-text-underline-hover fw-bolder'
       p.card-text = truncate(bulletin.description, length: 100)
     .card-footer.text-center.align-middle
       p.x-fs-8.mb-0.text-secondary

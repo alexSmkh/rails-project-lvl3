@@ -22,20 +22,28 @@ html
           button.btn-close type='button' data-bs-dismiss='alert' area-label='Close'
 
     header.container
-      nav.d-flex.justify-content-between.align-items-center.py-2.px-4
-        = link_to root_path, class: 'fs-3' do
-          i.fa-solid.fa-house
+      nav.row.py-2.px-4
+        .col-1
+          = link_to root_path, class: 'fs-3' do
+            i.fa-solid.fa-house
+
         - if signed_in?
-          = link_to auth_path, method: :delete,
-                                  data: { confirmation: t('messages.are_you_shure') },
-                                  class: 'fs-5 text-decoration-none' do
-            i.fa-solid.fa-arrow-right-from-bracket.me-2
-            span = t('sign_out')
+          .col.text-end
+            = link_to new_bulletin_path, class: 'text-decoration-none me-3 align-middle' do
+                i.fa-solid.fa-plus.me-2
+                span = t('create_bulletin')
+
+            = link_to auth_path, method: :delete,
+                                    data: { confirm: t('messages.are_you_shure') },
+                                    class: 'btn btn-outline-secondary' do
+              i.fa-solid.fa-arrow-right-from-bracket.me-2
+              span = t('sign_out')
 
         - else
-          = link_to new_auth_path, class: 'fs-5 text-decoration-none' do
-            i.fa-solid.fa-arrow-right-to-bracket.me-2
-            span = t('sign_in')
+          .col.text-end
+            = link_to new_auth_path, class: 'text-decoration-none' do
+              i.fa-solid.fa-arrow-right-to-bracket.me-2
+              span = t('sign_in')
 
     main.flex-grow-1.my-2.container
       = yield

@@ -3,12 +3,12 @@
 class Bulletin < ApplicationRecord
   has_one_attached :image
 
-  before_save :capitalize_name
+  before_save :capitalize_title
 
   belongs_to :user
   belongs_to :category
 
-  validates :name, presence: true, length: { maximum: 100 }
+  validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 3000 }
 
   validates :image, attached: true,
@@ -17,7 +17,7 @@ class Bulletin < ApplicationRecord
 
   private
 
-  def capitalize_name
-    name.capitalize!
+  def capitalize_title
+    title.capitalize!
   end
 end
