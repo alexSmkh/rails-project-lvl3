@@ -41,7 +41,7 @@ html
 
         - else
           .col.text-end
-            = link_to new_auth_path, class: 'text-decoration-none' do
+            = link_to new_auth_path, class: 'btn btn-outline-primary' do
               i.fa-solid.fa-arrow-right-to-bracket.me-2
               span = t('sign_in')
 
@@ -50,4 +50,4 @@ html
 
     footer.footer.mt-auto.py-2.container.text-center
         = link_to 'https://github.com/alexSmkh/rails-project-lvl3', class: 'fs-4' do
-          i.fa-brands.fa-github
+          i.fa-brands.fa-github-alt
