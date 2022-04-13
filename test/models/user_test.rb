@@ -3,7 +3,23 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @user = users(:one)
+  end
+
+  test 'valid user' do
+    assert { @user.valid? }
+  end
+
+  test 'invalid user without name' do
+    @user.name = nil
+    refute @user.valid?
+    assert_not_nil @user.errors[:name]
+  end
+
+  test 'invalid user without email' do
+    @user.email = nil
+    refute @user.valid?
+    assert_not_nil @user.errors[:email]
+  end
 end
