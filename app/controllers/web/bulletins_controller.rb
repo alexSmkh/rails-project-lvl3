@@ -11,15 +11,13 @@ class Web::BulletinsController < Web::ApplicationController
 
   def new
     @bulletin = Bulletin.new
-  end
-
-  def edit
-    @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin
   end
 
   def create
     @bulletin = Bulletin.new(bulletin_params)
     @bulletin.user = current_user
+    authorize @bulletin
 
     respond_to do |format|
       if @bulletin.save
@@ -33,8 +31,14 @@ class Web::BulletinsController < Web::ApplicationController
     end
   end
 
+  def edit
+    @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin
+  end
+
   def update
     @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin
 
     respond_to do |format|
       if @bulletin.update(bulletin_params)
@@ -53,7 +57,9 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def destroy
+    @bulletin = Bulletin.find(params[:id])
     @bulletin.destroy
+    authorize @bulletin
 
     respond_to do |format|
       format.html do
@@ -67,6 +73,6 @@ class Web::BulletinsController < Web::ApplicationController
   private
 
   def bulletin_params
-    params.require(:bulletin).permit(:name, :description, :category_id, :image)
+    params.require(:bulletin).permit(:title, :description, :category_id, :image)
   end
 end

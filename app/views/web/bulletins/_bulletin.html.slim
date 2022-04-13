@@ -4,6 +4,14 @@
       = link_to bulletin.category.name,
                 '#',
                 class: 'fs-5 text-body x-text-underline-hover'
+    - if policy(bulletin).update?
+      .col.text-end
+        = link_to edit_bulletin_path(bulletin), class: 'me-2' do
+          i.fa-solid.fa-pen-to-square.me-2.text-secondary
+        = link_to bulletin_path(bulletin),
+                  method: :delete,
+                  data: { confirm: t('messages.are_you_shure') } do
+          i.fa-solid.fa-trash.text-secondary
   .row.mb-2
     .col
       h1.mb-0.fs-2 = bulletin.title.capitalize
