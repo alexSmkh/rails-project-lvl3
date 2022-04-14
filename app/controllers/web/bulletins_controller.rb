@@ -19,15 +19,10 @@ class Web::BulletinsController < Web::ApplicationController
     @bulletin.user = current_user
     authorize @bulletin
 
-    respond_to do |format|
-      if @bulletin.save
-        format.html do
-          redirect_to bulletin_url(@bulletin),
-                      notice: t('.successfully_created')
-        end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @bulletin.save
+      redirect_to bulletin_path(@bulletin), notice: t('.successfully_created')
+    else
+      render :new
     end
   end
 
@@ -40,34 +35,19 @@ class Web::BulletinsController < Web::ApplicationController
     @bulletin = Bulletin.find(params[:id])
     authorize @bulletin
 
-    respond_to do |format|
-      if @bulletin.update(bulletin_params)
-        format.html do
-          redirect_to bulletin_url(@bulletin),
-                      notice: t('.successfully_updated')
-        end
-        format.json { render :show, status: :ok, location: @bulletin }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json do
-          render json: @bulletin.errors, status: :unprocessable_entity
-        end
-      end
+    if @bulletin.update(bulletin_params)
+      redirect_to bulletin_path(@bulletin), notice: t('.successfully_updated')
+    else
+      render :edit
     end
   end
 
   def destroy
     @bulletin = Bulletin.find(params[:id])
-    @bulletin.destroy
     authorize @bulletin
+    @bulletin.destroy
 
-    respond_to do |format|
-      format.html do
-        redirect_to bulletins_url,
-                    notice: t('.successfully_destroyed')
-      end
-      format.json { head :no_content }
-    end
+    redirect_to bulletins_path, notice: t('.successfully_destroyed')
   end
 
   private
