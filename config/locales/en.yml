@@ -8,13 +8,15 @@ en:
   show: Show
   posted_by: Posted by
 
+
   helpers:
     submit:
       create: Create
       edit: Edit
 
   messages:
-    are_you_shure: 'Are you sure?'
-    successfully_logged_in: 'You are successfully logged in'
-    successfully_logged_out: 'You are successfully logged out'
-    unccessfully_logged_in: 'Uh oh, something went wrong. Please try to sign in again'
+    are_you_shure: Are you sure?
+    successfully_logged_in: You are successfully logged in
+    successfully_logged_out: You are successfully logged out
+    unccessfully_logged_in: Uh oh, something went wrong. Please try to sign in again
+    user_not_authorized: You are not authorized to perform this action
