@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   scope module: 'web' do
     post 'auth/:provider', to: 'auth#request', as: :auth_request
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
-    get 'auth/new', as: :new_auth
-    delete 'auth', to: 'auth#destroy'
+
+    get 'sessions/new', as: 'new_session'
+    delete 'sessions', to: 'sessions#destroy', as: 'session'
 
     resources :bulletins
 

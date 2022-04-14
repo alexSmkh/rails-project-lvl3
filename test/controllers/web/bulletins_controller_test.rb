@@ -3,7 +3,7 @@
 require 'test_helper'
 require 'securerandom'
 
-class BulletinsControllerTest < ActionDispatch::IntegrationTest
+class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @bulletin = bulletins(:one)
     @category = categories(:one)

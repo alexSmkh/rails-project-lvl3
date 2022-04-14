@@ -33,7 +33,7 @@ html
                 i.fa-solid.fa-plus.me-2
                 span = t('create_bulletin')
 
-            = link_to auth_path, method: :delete,
+            = link_to session_path, method: :delete,
                                     data: { confirm: t('messages.are_you_shure') },
                                     class: 'btn btn-outline-secondary' do
               i.fa-solid.fa-arrow-right-from-bracket.me-2
@@ -41,7 +41,7 @@ html
 
         - else
           .col.text-end
-            = link_to new_auth_path, class: 'btn btn-outline-primary' do
+            = link_to new_session_path, class: 'btn btn-outline-primary' do
               i.fa-solid.fa-arrow-right-to-bracket.me-2
               span = t('sign_in')
 
