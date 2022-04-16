@@ -1,0 +1,11 @@
+en:
+  web:
+    categories:
+      create:
+        successfully_created: Category was successfully created
+      edit:
+        title: Editing Category
+      update:
+        successfully_updated: Category was successfully updated
+      destroy:
+        successfully_destroyed: Category was successfully destroyed
