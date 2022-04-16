@@ -9,14 +9,11 @@ class BulletinsTest < ApplicationSystemTestCase
     @first_bulletin = bulletins(:one)
     @second_bulletin = bulletins(:one)
     @user = users(:one)
+
   end
 
-  test 'visit the root page' do
-    visit bulletins_url
-
-    assert page.has_link? '', href: root_path
-    assert page.has_selector? 'i.fa-solid.fa-house'
-    assert page.has_link? I18n.t('sign_in'), href: new_session_path
+  test 'visit bulletin index' do
+    visit root_path
 
     assert page.has_selector? 'h1', text: I18n.t('bulletins')
 
@@ -28,13 +25,77 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'img'
 
-    assert page.has_selector? 'p', text: "#{I18n.t('posted_by')} #{@first_bulletin.user.name} #{time_ago_in_words @first_bulletin.created_at}".html_safe
-    assert page.has_selector? 'p', text: "#{I18n.t('posted_by')} #{@second_bulletin.user.name} #{time_ago_in_words @second_bulletin.created_at}".html_safe
-
-    assert page.has_link? '', href: 'https://github.com/alexSmkh/rails-project-lvl3'
+    assert page.has_content? "#{I18n.t('posted_by')} #{@first_bulletin.user.name} #{time_ago_in_words @first_bulletin.created_at}".html_safe
+    assert page.has_content? "#{I18n.t('posted_by')} #{@second_bulletin.user.name} #{time_ago_in_words @second_bulletin.created_at}".html_safe
   end
 
-  test 'creating a Bulletin' do
+  test 'creating a bulletin' do
     sign_in @user
+    category = categories(:one)
+
+    visit new_bulletin_path
+
+    title = Faker::Commerce.product_name.capitalize
+    description = Faker::Lorem.paragraph(sentence_count: 5)
+
+    fill_in I18n.t('simple_form.labels.bulletin.new.title'), with: title
+    fill_in I18n.t('simple_form.labels.bulletin.new.description'), with: description
+    select category.name, from: I18n.t('simple_form.labels.bulletin.new.category')
+    attach_file I18n.t('simple_form.labels.bulletin.new.image'),
+                Rails.root.join('test', 'fixtures', 'files', 'two.png')
+    click_on I18n.t('helpers.submit.bulletin.create')
+
+    new_bulletin = Bulletin.last
+
+    assert_current_path bulletin_path(new_bulletin)
+
+    assert page.has_content? I18n.t('web.bulletins.create.successfully_created')
+    assert page.has_content? title
+    assert page.has_content? description
+    assert page.has_selector? 'img'
+    assert page.has_content? category.name
+    assert page.has_content? @user.name
+  end
+
+  test 'updating bulletin' do
+    sign_in @user
+    bulletin = bulletins(:one)
+    category = categories(:two)
+
+    visit edit_bulletin_path(bulletin)
+
+    updated_title = Faker::Commerce.product_name.capitalize
+    updated_description = Faker::Lorem.paragraph(sentence_count: 5)
+
+    fill_in I18n.t('simple_form.labels.bulletin.new.title'), with: updated_title
+    fill_in I18n.t('simple_form.labels.bulletin.new.description'), with: updated_description
+    select category.name, from: I18n.t('simple_form.labels.bulletin.new.category')
+    attach_file I18n.t('simple_form.labels.bulletin.new.image'),
+                Rails.root.join('test', 'fixtures', 'files', 'two.png')
+    click_on I18n.t('helpers.submit.bulletin.update')
+
+    assert_current_path bulletin_path(bulletin)
+
+    assert page.has_content? I18n.t('web.bulletins.update.successfully_updated')
+    assert page.has_content? updated_title
+    assert page.has_content? updated_description
+    assert page.has_content? category.name
+    assert page.has_selector? 'img'
+    assert page.has_content? @user.name
+  end
+
+  test 'visit the show bulletin page' do
+    sign_in @user
+    bulletin = bulletins(:one)
+
+    visit bulletin_path(bulletin)
+
+    assert page.has_content? bulletin.title
+    assert page.has_content? bulletin.description
+    assert page.has_content? bulletin.user.name
+    assert page.has_content? bulletin.category.name
+    assert page.has_selector? 'img'
+    assert page.has_link? edit_bulletin_path(bulletin)
+    assert page.has_link? bulletin_path(bulletin)
   end
 end

@@ -3,7 +3,14 @@
 one:
   name: <%= Faker::Internet.username %>
   email: <%= Faker::Internet.email %>
+  admin: false
 
 two:
   name: <%= Faker::Internet.username %>
   email: <%= Faker::Internet.email %>
+  admin: false
+
+admin:
+  name: <%= Faker::Internet.username %>
+  email: <%= Faker::Internet.email %>
+  admin: true

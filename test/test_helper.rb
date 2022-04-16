@@ -11,7 +11,7 @@ class ActiveSupport::TestCase
   fixtures :all
 end
 
-module AuthConcernTest
+class ActionDispatch::IntegrationTest
   include AuthConcern
 
   def sign_in(user, _options = {})
@@ -28,14 +28,25 @@ module AuthConcernTest
       OmniAuth::AuthHash::InfoHash.new(auth_hash)
 
     get callback_auth_url('github')
-    session[:user_id] = user.id
   end
 end
 
-class ActionDispatch::IntegrationTest
-  include AuthConcernTest
-end
-
 class ActionDispatch::SystemTestCase
-  include AuthConcernTest
+  include AuthConcern
+
+  def sign_in(user, _options = {})
+    auth_hash = {
+      provider: 'github',
+      uid: '12345',
+      info: {
+        email: user.email,
+        name: user.name
+      }
+    }
+
+    OmniAuth.config.mock_auth[:github] =
+      OmniAuth::AuthHash::InfoHash.new(auth_hash)
+
+    visit callback_auth_url('github')
+  end
 end
