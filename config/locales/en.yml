@@ -1,7 +1,10 @@
 en:
+  all: All
   back: Back
   bulletins: Bulletins
+  categories: Categories
   create_bulletin: Create Bulletin
+  select_category: Select Category
   sign_in: Sign in
   sign_in_with: Sign in with
   sign_out: Sign out

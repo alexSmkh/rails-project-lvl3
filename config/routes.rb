@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
     resources :bulletins
+    resources :categories, only: %i[index show]
 
     root 'bulletins#index'
   end

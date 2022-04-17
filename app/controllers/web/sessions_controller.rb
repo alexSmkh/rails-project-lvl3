@@ -2,9 +2,9 @@
 
 class Web::SessionsController < Web::ApplicationController
   def new
-    return unless current_user
+    set_nav_categories
 
-    redirect_to root_path, notice: t('messages.already_signed_in')
+    redirect_to root_path, notice: t('messages.already_signed_in') if current_user
   end
 
   def destroy

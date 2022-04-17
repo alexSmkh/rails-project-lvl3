@@ -3,6 +3,8 @@
 class Category < ApplicationRecord
   before_save :capitalize_name
 
+  has_many :bulletins, dependent: :destroy
+
   validates :name, presence: true
 
   private
