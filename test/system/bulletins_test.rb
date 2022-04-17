@@ -9,7 +9,6 @@ class BulletinsTest < ApplicationSystemTestCase
     @first_bulletin = bulletins(:one)
     @second_bulletin = bulletins(:one)
     @user = users(:one)
-
   end
 
   test 'visit bulletin index' do
@@ -59,10 +58,9 @@ class BulletinsTest < ApplicationSystemTestCase
 
   test 'updating bulletin' do
     sign_in @user
-    bulletin = bulletins(:one)
     category = categories(:two)
 
-    visit edit_bulletin_path(bulletin)
+    visit edit_bulletin_path(@first_bulletin)
 
     updated_title = Faker::Commerce.product_name.capitalize
     updated_description = Faker::Lorem.paragraph(sentence_count: 5)
@@ -74,7 +72,7 @@ class BulletinsTest < ApplicationSystemTestCase
                 Rails.root.join('test', 'fixtures', 'files', 'two.png')
     click_on I18n.t('helpers.submit.bulletin.update')
 
-    assert_current_path bulletin_path(bulletin)
+    assert_current_path bulletin_path(@first_bulletin)
 
     assert page.has_content? I18n.t('web.bulletins.update.successfully_updated')
     assert page.has_content? updated_title
@@ -86,16 +84,39 @@ class BulletinsTest < ApplicationSystemTestCase
 
   test 'visit the show bulletin page' do
     sign_in @user
-    bulletin = bulletins(:one)
 
-    visit bulletin_path(bulletin)
+    visit bulletin_path(@first_bulletin)
 
-    assert page.has_content? bulletin.title
-    assert page.has_content? bulletin.description
-    assert page.has_content? bulletin.user.name
-    assert page.has_content? bulletin.category.name
+    assert page.has_content? @first_bulletin.title
+    assert page.has_content? @first_bulletin.description
+    assert page.has_content? @first_bulletin.user.name
+    assert page.has_content? @first_bulletin.category.name
     assert page.has_selector? 'img'
-    assert page.has_link? edit_bulletin_path(bulletin)
-    assert page.has_link? bulletin_path(bulletin)
+
+    within("a[href='#{edit_bulletin_path(@first_bulletin)}']") do
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+    end
+
+    within("a[href='#{bulletin_path(@first_bulletin)}']") do
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+    end
+  end
+
+  test 'visit the edit bulletin page from the show page' do
+    sign_in @user
+
+    visit bulletin_path(@first_bulletin)
+
+    click_link '', href: edit_bulletin_path(@first_bulletin)
+    assert_current_path edit_bulletin_path(@first_bulletin)
+  end
+
+  test 'should show the dialog for destroying the bulletin' do
+    sign_in @user
+
+    visit bulletin_path(@first_bulletin)
+
+    click_link '', href: bulletin_path(@first_bulletin)
+    dismiss_confirm
   end
 end

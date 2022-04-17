@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: <%= Faker::Commerce.product_name.capitalize %>
+  description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one
   category: one
 
 two:
-  title: MyString
-  description: MyText
+  title: <%= Faker::Commerce.product_name.capitalize %>
+  description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: two
   category: two

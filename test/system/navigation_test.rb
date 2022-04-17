@@ -37,7 +37,7 @@ class BulletinsTest < ApplicationSystemTestCase
     assert_current_path new_bulletin_path
   end
 
-  test 'should show sign out alert' do
+  test 'should show the dialog for sign out' do
     sign_in @user
 
     visit root_path
