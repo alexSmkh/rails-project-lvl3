@@ -34,6 +34,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet'
   gem 'html2slim', '~> 0.2.0'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
@@ -52,4 +53,3 @@ group :production do
   gem 'aws-sdk-s3', require: false
   gem 'pg'
 end
-

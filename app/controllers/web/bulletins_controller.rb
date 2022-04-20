@@ -4,8 +4,7 @@ class Web::BulletinsController < Web::ApplicationController
   before_action :set_nav_categories, only: %i[index show new edit]
 
   def index
-    @bulletins = Bulletin.order(created_at: :desc)
-    @categories = Category.order(name: :desc)
+    @bulletins = Bulletin.includes(:user, { image_attachment: :blob }).order(created_at: :desc)
   end
 
   def show
