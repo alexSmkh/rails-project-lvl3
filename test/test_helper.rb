@@ -33,6 +33,7 @@ end
 
 class ActionDispatch::SystemTestCase
   include AuthConcern
+  include ActionView::Helpers::DateHelper
 
   def sign_in(user, _options = {})
     auth_hash = {
@@ -48,5 +49,9 @@ class ActionDispatch::SystemTestCase
       OmniAuth::AuthHash::InfoHash.new(auth_hash)
 
     visit callback_auth_url('github')
+  end
+
+  def posted_by(bulletin)
+    "#{I18n.t('posted_by')} #{bulletin.user.name} #{time_ago_in_words bulletin.created_at}".html_safe
   end
 end

@@ -24,8 +24,8 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'img'
 
-    assert page.has_content? "#{I18n.t('posted_by')} #{@first_bulletin.user.name} #{time_ago_in_words @first_bulletin.created_at}".html_safe
-    assert page.has_content? "#{I18n.t('posted_by')} #{@second_bulletin.user.name} #{time_ago_in_words @second_bulletin.created_at}".html_safe
+    assert page.has_content? posted_by(@first_bulletin)
+    assert page.has_content? posted_by(@second_bulletin)
   end
 
   test 'creating a bulletin' do
