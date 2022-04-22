@@ -53,9 +53,14 @@ html
 
         - if signed_in?
           .col.text-end
-            = link_to new_bulletin_path, class: 'text-decoration-none me-3 align-middle' do
+            = link_to new_bulletin_path, class: 'text-decoration-none align-middle' do
                 i.fa-solid.fa-plus.me-md-2.fa-lg
                 span.d-none.d-md-inline-block = t('create_bulletin')
+
+            - if current_user.admin?
+              = link_to admin_categories_path, class: 'btn' do
+                i.fa-solid.fa-lock.text-warning.me-md-2.fa-lg
+                span.d-none.d-md-inline-block.text-warning = t('admin')
 
             = link_to session_path, method: :delete,
                                     data: { confirm: t('messages.are_you_shure') },

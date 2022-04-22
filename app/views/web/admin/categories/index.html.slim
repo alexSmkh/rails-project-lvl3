@@ -1,0 +1,55 @@
+.container
+  .row.mb-3.align-items-center
+    .col.text-center
+      = link_to t('bulletins'),
+                  '#',
+                  class: 'nav-link'
+
+    .col.text-center.bg-primary.rounded
+        = link_to t('categories'),
+                  '#',
+                  class: 'nav-link text-light fw-bold'
+
+    .col.text-center
+        = link_to t('bulletin_moderate'),
+                  '#',
+                  class: 'nav-link'
+
+  .shadow.rounded.overflow-hidden
+    table.table.align-middle
+      thead
+        tr
+          th = t('.id')
+          th = t('.name')
+          th.text-center = t('.actions')
+      tbody
+        tr
+          td colspan='3'
+            = link_to new_admin_category_path, class: 'btn btn-primary'
+              i.fa-solid.fa-plus.me-1
+              = t('.create')
+
+        - @categories.each do |category|
+          tr
+            td
+              = category.id
+            td
+              = link_to category.name,
+                        category_path(category),
+                        class: 'x-text-underline-hover'
+            td.text-center
+              = link_to edit_admin_category_path(category),
+                        class: 'btn',
+                        'data-bs-toggle': 'tooltip',
+                        'data-bs-placement': 'top',
+                        title: t('edit') do
+                i.fa-solid.fa-pen-to-square.text-secondary
+
+              = link_to admin_category_path(category),
+                        method: :delete,
+                        data: { confirm: t('messages.are_you_sure') },
+                        class: 'btn',
+                        'data-bs-toggle': 'tooltip',
+                        'data-bs-placement': 'top',
+                        title: t('delete') do
+                i.fa-solid.fa-trash.text-secondary
