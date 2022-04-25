@@ -5,16 +5,17 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
 
   def index
     @categories = Category.order(:name)
+    authorize @category, policy_class: Admin::CategoryPolicy
   end
 
   def new
     @category = Category.new
-    authorize @category
+    authorize @category, policy_class: Admin::CategoryPolicy
   end
 
   def create
     @category = Category.new(category_params)
-    authorize @category
+    authorize @category, policy_class: Admin::CategoryPolicy
 
     if @category.save
       redirect_to admin_categories_path, notice: t('.successfully_created')
@@ -25,12 +26,12 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-    authorize @category
+    authorize @category, policy_class: Admin::CategoryPolicy
   end
 
   def update
     @category = Category.find(params[:id])
-    authorize @category
+    authorize @category, policy_class: Admin::CategoryPolicy
 
     if @category.update(category_params)
       redirect_to admin_categories_path, notice: t('.successfully_updated')
@@ -41,6 +42,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
+    authorize @category, policy_class: Admin::CategoryPolicy
     @category.destroy
 
     redirect_to admin_categories_path, notice: t('.successfully_destroyed')

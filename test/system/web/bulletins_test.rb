@@ -16,8 +16,10 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'h1', text: I18n.t('bulletins')
 
-    assert page.has_link? @first_bulletin.title, href: bulletin_path(@first_bulletin)
-    assert page.has_link? @second_bulletin.title, href: bulletin_path(@second_bulletin)
+    assert page.has_link? @first_bulletin.title,
+                          href: bulletin_path(@first_bulletin)
+    assert page.has_link? @second_bulletin.title,
+                          href: bulletin_path(@second_bulletin)
 
     assert page.has_content? @first_bulletin.description.truncate(100)
     assert page.has_content? @second_bulletin.description.truncate(100)
@@ -38,8 +40,10 @@ class BulletinsTest < ApplicationSystemTestCase
     description = Faker::Lorem.paragraph(sentence_count: 5)
 
     fill_in I18n.t('simple_form.labels.bulletin.new.title'), with: title
-    fill_in I18n.t('simple_form.labels.bulletin.new.description'), with: description
-    select category.name, from: I18n.t('simple_form.labels.bulletin.new.category')
+    fill_in I18n.t('simple_form.labels.bulletin.new.description'),
+            with: description
+    select category.name,
+           from: I18n.t('simple_form.labels.bulletin.new.category')
     attach_file I18n.t('simple_form.labels.bulletin.new.image'),
                 Rails.root.join('test', 'fixtures', 'files', 'two.png')
     click_on I18n.t('helpers.submit.bulletin.create')
@@ -66,8 +70,10 @@ class BulletinsTest < ApplicationSystemTestCase
     updated_description = Faker::Lorem.paragraph(sentence_count: 5)
 
     fill_in I18n.t('simple_form.labels.bulletin.new.title'), with: updated_title
-    fill_in I18n.t('simple_form.labels.bulletin.new.description'), with: updated_description
-    select category.name, from: I18n.t('simple_form.labels.bulletin.new.category')
+    fill_in I18n.t('simple_form.labels.bulletin.new.description'),
+            with: updated_description
+    select category.name,
+           from: I18n.t('simple_form.labels.bulletin.new.category')
     attach_file I18n.t('simple_form.labels.bulletin.new.image'),
                 Rails.root.join('test', 'fixtures', 'files', 'two.png')
     click_on I18n.t('helpers.submit.bulletin.update')

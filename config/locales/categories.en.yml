@@ -1,11 +1,22 @@
 en:
   web:
-    categories:
-      create:
-        successfully_created: Category was successfully created
-      edit:
-        title: Editing Category
-      update:
-        successfully_updated: Category was successfully updated
-      destroy:
-        successfully_destroyed: Category was successfully destroyed
+    admin:
+      categories:
+        index:
+          actions: Actions
+          create: Create
+          date: Date
+          name: Name
+          status: Status
+          id: Id
+        new:
+          create: Create Category
+        create:
+          successfully_created: Category was successfully created
+        edit:
+          edit: Edit Category
+          title: Editing Category
+        update:
+          successfully_updated: Category was successfully updated
+        destroy:
+          successfully_destroyed: Category was successfully destroyed

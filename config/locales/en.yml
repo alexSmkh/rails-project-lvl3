@@ -1,9 +1,14 @@
 en:
+  admin: Admin
   all: All
   back: Back
   bulletins: Bulletins
+  bulletin_moderation: Bulletins in moderation
   categories: Categories
   create_bulletin: Create Bulletin
+  create_cagegory: Create Categoryadmin_edit_category
+  edit: Edit
+  delete: Delete
   select_category: Select Category
   sign_in: Sign in
   sign_in_with: Sign in with

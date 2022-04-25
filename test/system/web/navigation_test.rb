@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BulletinsTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)

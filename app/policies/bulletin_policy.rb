@@ -6,10 +6,10 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user_id == user&.id
+    record.user_id == user&.id || user&.admin?
   end
 
   def destroy?
-    record.user_id == user&.id
+    record.user_id == user&.id || user&.admin?
   end
 end

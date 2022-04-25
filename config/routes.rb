@@ -9,7 +9,13 @@ Rails.application.routes.draw do
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
     resources :bulletins
-    resources :categories, only: %i[index show]
+
+    get 'categories', to: 'categories#index'
+    get 'categories/:id', to: 'categories#show', as: 'category'
+
+    namespace :admin do
+      resources :categories, except: %i[show]
+    end
 
     root 'bulletins#index'
   end
