@@ -5,7 +5,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
 
   def index
     @categories = Category.order(:name)
-    authorize @category, policy_class: Admin::CategoryPolicy
+    authorize :category, policy_class: Admin::CategoryPolicy
   end
 
   def new
