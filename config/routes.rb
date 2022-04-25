@@ -10,8 +10,7 @@ Rails.application.routes.draw do
 
     resources :bulletins
 
-    get 'categories', to: 'categories#index'
-    get 'categories/:id', to: 'categories#show', as: 'category'
+    resources :categories, only: %i[index show]
 
     namespace :admin do
       resources :categories, except: :show
