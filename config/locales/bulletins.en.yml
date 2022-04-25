@@ -11,3 +11,10 @@ en:
         successfully_updated: Bulletin was successfully updated
       destroy:
         successfully_destroyed: Bulletin was successfully destroyed
+    admin:
+      bulletins:
+        index:
+          actions: Actions
+          date: Publication date
+          title: Title
+          status: Status

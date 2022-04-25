@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     get 'categories/:id', to: 'categories#show', as: 'category'
 
     namespace :admin do
-      resources :categories, except: %i[show]
+      resources :categories, except: :show
+      resources :bulletins, only: :index
     end
 
     root 'bulletins#index'

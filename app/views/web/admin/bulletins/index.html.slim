@@ -1,14 +1,14 @@
 .container
   .row.mb-3.align-items-center
-    .col.text-center
-      = link_to t('bulletins'),
-                  admin_bulletins_path,
-                  class: 'nav-link'
-
     .col.text-center.bg-primary.rounded
-        = link_to t('categories'),
+      = link_to t('bulletins'),
                   '#',
                   class: 'nav-link text-light fw-bold'
+
+    .col.text-center
+        = link_to t('categories'),
+                  admin_categories_path,
+                  class: 'nav-link'
 
     .col.text-center
         = link_to t('bulletin_moderation'),
@@ -19,33 +19,30 @@
     table.table.align-middle
       thead
         tr
-          th = t('.id')
-          th = t('.name')
-          th.text-center = t('.actions')
+          th = t('.title')
+          th = t('.status')
+          th = t('.date')
+          th = t('.actions')
       tbody
-        tr
-          td colspan='3'
-            = link_to new_admin_category_path, class: 'btn btn-primary'
-              i.fa-solid.fa-plus.me-1
-              = t('.create')
-
-        - @categories.each do |category|
+        - @bulletins.each do |bulletin|
           tr
             td
-              = category.id
-            td
-              = link_to category.name,
-                        category_path(category),
+              = link_to bulletin.title,
+                        bulletin_path(bulletin),
                         class: 'x-text-underline-hover'
-            td.text-center
-              = link_to edit_admin_category_path(category),
+            td
+              | Published
+            td
+              = time_ago_in_words(bulletin.created_at)
+            td
+              = link_to bulletin_path(bulletin),
                         class: 'btn',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
                 i.fa-solid.fa-pen-to-square.text-secondary
 
-              = link_to admin_category_path(category),
+              = link_to bulletin_path(bulletin),
                         method: :delete,
                         data: { confirm: t('messages.are_you_sure') },
                         class: 'btn',
