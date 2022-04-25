@@ -2,7 +2,7 @@
 
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   def index
-    @bulletins = Bulletin.all
+    @bulletins = Bulletin.order(created_at: :desc)
     set_nav_categories
   end
 end

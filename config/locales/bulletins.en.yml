@@ -15,6 +15,6 @@ en:
       bulletins:
         index:
           actions: Actions
-          date: Publication date
+          date: Creation date
           title: Title
           status: Status

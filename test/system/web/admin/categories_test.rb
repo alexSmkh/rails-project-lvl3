@@ -13,7 +13,7 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
   test 'visit category index' do
     visit admin_categories_path
 
-    assert page.has_link? I18n.t('bulletins'), href: '#'
+    assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: '#'
     assert page.has_link? I18n.t('bulletin_moderation'), href: '#'
 
