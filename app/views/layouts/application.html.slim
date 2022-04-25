@@ -58,7 +58,7 @@ html
                 span.d-none.d-md-inline-block = t('create_bulletin')
 
             - if current_user.admin?
-              = link_to admin_categories_path, class: 'btn' do
+              = link_to admin_bulletins_path, class: 'btn' do
                 i.fa-solid.fa-lock.text-warning.me-md-2.fa-lg
                 span.d-none.d-md-inline-block.text-warning = t('admin')
 
