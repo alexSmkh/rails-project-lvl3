@@ -8,6 +8,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     @bulletin = bulletins(:one)
     @category = categories(:one)
     @user = users(:one)
+    sign_in @user
   end
 
   test 'should get index' do
@@ -15,20 +16,12 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'signed user should get new' do
-    sign_in @user
+  test 'user should get new' do
     get new_bulletin_url
     assert_response :success
   end
 
-  test 'unauth user should not get new' do
-    get new_bulletin_url
-    assert_redirected_to root_path
-  end
-
-  test 'signed user should create bulletin' do
-    sign_in @user
-
+  test 'ser should create bulletin' do
     bulletin = {
       category_id: @category.id,
       description: Faker::Lorem.paragraph(sentence_count: 5),
@@ -50,41 +43,17 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert { new_bulletin }
   end
 
-  test 'unauth user should not create bulletin' do
-    title = 'Title'
-    post bulletins_path,
-         params: {
-           bulletin: {
-             category_id: @category.id,
-             description: Faker::Lorem.paragraph(sentence_count: 5),
-             title: title,
-             image: fixture_file_upload('one.png', 'image/png')
-           }
-         }
-
-    assert_nil Bulletin.find_by(title: title)
-    assert_redirected_to root_path
-  end
-
   test 'should show bulletin' do
     get bulletin_url(@bulletin)
     assert_response :success
   end
 
-  test 'signed user should get edit' do
-    sign_in @user
+  test 'user should get edit' do
     get edit_bulletin_url(@bulletin)
     assert_response :success
   end
 
-  test 'unauth user should not get edit' do
-    get edit_bulletin_url(@bulletin)
-    assert_redirected_to root_path
-  end
-
-  test 'should update bulletin' do
-    sign_in @user
-
+  test 'user should update bulletin' do
     updated_description = Faker::Lorem.paragraph(sentence_count: 5)
     updated_title = Faker::Commerce.product_name.capitalize
     category_id = categories(:two).id
@@ -107,15 +76,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert { @bulletin.category_id == category_id }
   end
 
-  test 'unauth user should not destroy bulletin' do
-    delete bulletin_url(@bulletin)
-
-    assert { Bulletin.find_by(id: @bulletin.id) }
-    assert_redirected_to root_path
-  end
-
-  test 'signed user should destroy bulletin' do
-    sign_in @user
+  test 'user should destroy bulletin' do
     delete bulletin_url(@bulletin)
 
     assert_nil Bulletin.find_by(id: @bulletin.id)

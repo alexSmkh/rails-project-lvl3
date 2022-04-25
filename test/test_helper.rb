@@ -52,6 +52,7 @@ class ActionDispatch::SystemTestCase
   end
 
   def posted_by(bulletin)
-    "#{I18n.t('posted_by')} #{bulletin.user.name} #{time_ago_in_words bulletin.created_at}".html_safe
+    "#{I18n.t('posted_by')} #{bulletin.user.name} #{time_ago_in_words bulletin.created_at}"
+      .html_safe
   end
 end
