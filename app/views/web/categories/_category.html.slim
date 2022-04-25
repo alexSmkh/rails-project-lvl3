@@ -7,10 +7,10 @@
                     class: 'x-text-underline-hover fw-bolder me-2'
 
           .d-flex
-            - if policy(category).edit?
+            - if current_user&.admin?
               = link_to '#' do
                 i.fa-solid.fa-pen-to-square.text-secondary
-            - if policy(category).destroy?
+            - if current_user&.admin?
               = link_to '#',
                         method: :delete,
                         confirm: { data: t('are_you_sure') } do
