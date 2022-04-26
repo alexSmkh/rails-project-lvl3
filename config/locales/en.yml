@@ -1,6 +1,7 @@
 en:
   admin: Admin
   all: All
+  archive: Archive
   back: Back
   bulletins: Bulletins
   bulletin_moderation: Bulletins in moderation
@@ -15,6 +16,8 @@ en:
   sign_out: Sign out
   show: Show
   posted_by: Posted by
+  publish: Publish
+  reject: Reject
 
   messages:
     already_signed_in: You are already signed in

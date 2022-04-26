@@ -1,6 +1,12 @@
 en:
   web:
     bulletins:
+      states:
+        draft: Draft
+        under_moderation: In moderation
+        published: Published
+        rejected: Rejected
+        archived: Archived
       new:
         title: New Bulletin
       create:
@@ -18,3 +24,16 @@ en:
           date: Creation date
           title: Title
           status: Status
+        moderation:
+          bulletins_in_moderation: Bulletins in moderation
+        publish:
+          success: The bulletin has been successfully published
+          failed: The bulletin was not published. Please try again
+        reject:
+          success: The bulletin has been successfully rejected
+          failed: The bulletin was not rejected. Please try again
+        archive:
+          success: The bulletin has been successfully archived
+          failed: The bulletin was not archived. Please try again
+
+

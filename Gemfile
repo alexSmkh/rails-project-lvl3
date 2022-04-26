@@ -5,8 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
+gem 'aasm', '~> 5.2'
 gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'counter_culture', '~> 2.0'
 gem 'jbuilder', '~> 2.7'
 gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'

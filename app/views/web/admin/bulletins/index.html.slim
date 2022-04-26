@@ -1,3 +1,5 @@
+h1 = t('bulletins')
+hr
 .container
   .row.mb-3.align-items-center
     .col.text-center.bg-primary.rounded
@@ -12,17 +14,17 @@
 
     .col.text-center
         = link_to t('bulletin_moderation'),
-                  '#',
+                  admin_moderation_path,
                   class: 'nav-link'
 
-  .shadow.rounded.overflow-hidden
+  .shadow.rounded.table-responsive
     table.table.align-middle
       thead
         tr
           th = t('.title')
-          th = t('.status')
-          th = t('.date')
-          th = t('.actions')
+          th.text-center = t('.status')
+          th.text-center = t('.date')
+          th.text-center = t('.actions')
       tbody
         - @bulletins.each do |bulletin|
           tr
@@ -30,23 +32,42 @@
               = link_to bulletin.title,
                         bulletin_path(bulletin),
                         class: 'x-text-underline-hover'
-            td
-              | Published
-            td
+            td.text-center
+              = build_state_badge(bulletin.state.to_sym)
+            td.text-center
               = time_ago_in_words(bulletin.created_at)
-            td
+            td.text-center
               = link_to edit_bulletin_path(bulletin),
-                        class: 'btn',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
-                i.fa-solid.fa-pen-to-square.text-secondary
+                span.badge.x-badge-secondary
+                  i.fa-solid.fa-pen-to-square
 
               = link_to bulletin_path(bulletin),
                         method: :delete,
                         data: { confirm: t('messages.are_you_sure') },
-                        class: 'btn',
+                        class: 'ms-1',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('delete') do
-                i.fa-solid.fa-trash.text-secondary
+                span.badge.x-badge-danger
+                  i.fa-solid.fa-trash
+
+              - unless bulletin.state == 'archived'
+                = link_to admin_bulletin_archive_path(bulletin),
+                          class: 'ms-1',
+                          'data-bs-toggle': 'tooltip',
+                          'data-bs-placement': 'top',
+                          title: t('archive') do
+                  span.badge.x-badge-warning
+                    i.fa-solid.fa-box-archive
+
+              - if bulletin.state == 'archived'
+                = link_to admin_bulletin_publish_path(bulletin),
+                          class: 'ms-1',
+                          'data-bs-toggle': 'tooltip',
+                          'data-bs-placement': 'top',
+                          title: t('publish') do
+                  span.badge.x-badge-success
+                    i.fa-solid.fa-check

@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.2.0)
+      concurrent-ruby (~> 1.0)
     actioncable (6.1.5)
       actionpack (= 6.1.5)
       activesupport (= 6.1.5)
@@ -103,6 +105,9 @@ GEM
       xpath (~> 3.2)
     childprocess (4.1.0)
     concurrent-ruby (1.1.10)
+    counter_culture (2.9.0)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
     crass (1.0.6)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
@@ -314,12 +319,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm (~> 5.2)
   active_storage_validations
   aws-sdk-s3
   bootsnap (>= 1.4.4)
   bullet
   byebug
   capybara (>= 3.26)
+  counter_culture (~> 2.0)
   dotenv-rails
   faker
   html2slim (~> 0.2.0)

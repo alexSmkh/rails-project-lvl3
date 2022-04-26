@@ -5,5 +5,5 @@
     .col.pb-2.border-bottom.mb-4
       h1 = @category.name
   .row
-    - @category.bulletins.each do |bulletin|
+    - @bulletins.each do |bulletin|
       = render 'web/bulletins/bulletin_card', bulletin: bulletin

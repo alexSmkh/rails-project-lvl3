@@ -53,18 +53,18 @@ html
 
         - if signed_in?
           .col.text-end
-            = link_to new_bulletin_path, class: 'text-decoration-none align-middle' do
+            = link_to new_bulletin_path, class: 'btn btn-sm text-primary' do
                 i.fa-solid.fa-plus.me-md-2.fa-lg
                 span.d-none.d-md-inline-block = t('create_bulletin')
 
             - if current_user.admin?
-              = link_to admin_bulletins_path, class: 'btn' do
+              = link_to admin_bulletins_path, class: 'btn btn-sm' do
                 i.fa-solid.fa-lock.text-warning.me-md-2.fa-lg
                 span.d-none.d-md-inline-block.text-warning = t('admin')
 
             = link_to session_path, method: :delete,
                                     data: { confirm: t('messages.are_you_sure') },
-                                    class: 'btn btn-sm btn-outline-secondary' do
+                                    class: 'btn btn-sm btn-light text-secondary' do
               i.fa-solid.fa-arrow-right-from-bracket.me-md-2
               span.d-none.d-md-inline-block = t('sign_out')
 

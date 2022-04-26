@@ -1,3 +1,5 @@
+h1 = t('categories')
+hr
 .container
   .row.mb-3.align-items-center
     .col.text-center
@@ -12,7 +14,7 @@
 
     .col.text-center
         = link_to t('bulletin_moderation'),
-                  '#',
+                  admin_moderation_path,
                   class: 'nav-link'
 
   .shadow.rounded.overflow-hidden

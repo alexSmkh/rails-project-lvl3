@@ -26,6 +26,36 @@
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
+.x-badge-primary {
+  color: #0c47a9;
+  background-color: #cfe0fc;
+}
+
+.x-badge-secondary {
+  color: #7622b1;
+  background-color: #ebcdfe;
+}
+
+.x-badge-success {
+  color: #0b4120;
+  background-color: #c7f5d9;
+}
+
+.x-badge-danger {
+  color: #790619;
+  background-color: #fdd8de;
+}
+
+.x-badge-warning {
+  color: #453008;
+  background-color: #ffebc1;
+}
+
+.x-badge-info {
+  color: #094154;
+  background-color: #d0f0fb;
+}
+
 .body-bg {
   background-color: #74EBD5;
   background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
