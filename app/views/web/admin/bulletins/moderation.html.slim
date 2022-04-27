@@ -38,6 +38,7 @@ hr
               = time_ago_in_words(bulletin.created_at)
             td.text-center
               = link_to admin_bulletin_publish_path(bulletin),
+                        method: :patch,
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('publish') do
@@ -45,6 +46,7 @@ hr
                   i.fa-solid.fa-check
 
               = link_to admin_bulletin_reject_path(bulletin),
+                        method: :patch,
                         class: 'ms-1',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
@@ -53,6 +55,7 @@ hr
                   i.fa-solid.fa-ban
 
               = link_to admin_bulletin_archive_path(bulletin),
+                        method: :patch,
                         class: 'ms-1',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',

@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :categories, except: :show
       resources :bulletins, only: :index do
-        get 'archive', to: 'bulletins#archive'
-        get 'reject', to: 'bulletins#reject'
-        get 'publish', to: 'bulletins#publish'
+        patch 'archive', to: 'bulletins#archive'
+        patch 'reject', to: 'bulletins#reject'
+        patch 'publish', to: 'bulletins#publish'
       end
       get 'admin', to: 'bulletins#moderation', as: 'moderation'
     end
