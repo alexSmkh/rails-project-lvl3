@@ -9,6 +9,7 @@ en:
   create_cagegory: Create Categoryadmin_edit_category
   edit: Edit
   delete: Delete
+  bulletin_moderation: Bulletin in moderation
   select_category: Select Category
   sign_in: Sign in
   sign_in_with: Sign in with

@@ -25,6 +25,10 @@ en:
           title: Title
           status: Status
         moderation:
+          actions: Actions
+          date: Creation date
+          title: Title
+          status: Status
           bulletins_in_moderation: Bulletins in moderation
         publish:
           success: The bulletin has been successfully published
