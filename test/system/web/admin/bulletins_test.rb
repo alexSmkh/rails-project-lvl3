@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require 'application_system_test_case'
-
+# rubocop:disable Metrics/ClassLength
 class Admin::BulletinsTest < ApplicationSystemTestCase
   setup do
     @admin = users(:admin)
-    @first_bulletin = bulletins(:one)
-    @second_bulletin = bulletins(:two)
+    @draft_bulletin = bulletins(:one)
+    @under_moderation_bulletin = bulletins(:two)
+    @published_bulletin = bulletins(:three)
+    @rejected_bulletin = bulletins(:four)
+    @archived_bulletin = bulletins(:five)
     sign_in @admin
   end
 
@@ -14,6 +17,83 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     visit admin_bulletins_path
 
     assert page.has_link? I18n.t('bulletins'), href: '#'
+    assert page.has_link? I18n.t('categories'), href: admin_categories_path
+    assert page.has_link? I18n.t('bulletin_moderation'), href: admin_moderation_path
+
+    assert page.has_selector? 'th',
+                              text: I18n.t('web.admin.bulletins.index.title')
+    assert page.has_selector? 'th',
+                              text: I18n.t('web.admin.bulletins.index.status')
+    assert page.has_selector? 'th',
+                              text: I18n.t('web.admin.bulletins.index.date')
+    assert page.has_selector? 'th',
+                              text: I18n.t('web.admin.bulletins.index.actions')
+
+    within(find_link(@draft_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@draft_bulletin.created_at)
+      assert page.has_content? @draft_bulletin.aasm.human_state
+      assert find_link('', href: edit_bulletin_path(@draft_bulletin))
+      assert find_link('', href: bulletin_path(@draft_bulletin))
+      assert find_link('', href: admin_bulletin_archive_path(@draft_bulletin))
+
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+      assert page.has_selector? 'i.fa-solid.fa-box-archive'
+    end
+
+    within(find_link(@under_moderation_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@under_moderation_bulletin.created_at)
+      assert page.has_content? @under_moderation_bulletin.aasm.human_state
+      assert find_link('', href: edit_bulletin_path(@under_moderation_bulletin))
+      assert find_link('', href: bulletin_path(@under_moderation_bulletin))
+      assert find_link('', href: admin_bulletin_archive_path(@under_moderation_bulletin))
+
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+      assert page.has_selector? 'i.fa-solid.fa-box-archive'
+    end
+
+    within(find_link(@published_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@published_bulletin.created_at)
+      assert page.has_content? @published_bulletin.aasm.human_state
+      assert find_link('', href: edit_bulletin_path(@published_bulletin))
+      assert find_link('', href: bulletin_path(@published_bulletin))
+      assert find_link('', href: admin_bulletin_archive_path(@published_bulletin))
+
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+      assert page.has_selector? 'i.fa-solid.fa-box-archive'
+    end
+
+    within(find_link(@rejected_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@rejected_bulletin.created_at)
+      assert page.has_content? @rejected_bulletin.aasm.human_state
+      assert find_link('', href: edit_bulletin_path(@rejected_bulletin))
+      assert find_link('', href: bulletin_path(@rejected_bulletin))
+      assert find_link('', href: admin_bulletin_archive_path(@rejected_bulletin))
+
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+      assert page.has_selector? 'i.fa-solid.fa-box-archive'
+    end
+
+    within(find_link(@archived_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@archived_bulletin.created_at)
+      assert page.has_content? @archived_bulletin.aasm.human_state
+      assert find_link('', href: edit_bulletin_path(@archived_bulletin))
+      assert find_link('', href: bulletin_path(@archived_bulletin))
+      assert page.has_no_selector? "a[href='#{admin_bulletin_archive_path(@archived_bulletin)}'"
+
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
+      assert page.has_no_selector? 'i.fa-solid.fa-box-archive'
+    end
+  end
+
+  test 'visit moderation page' do
+    visit admin_moderation_path
+
+    assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: admin_categories_path
     assert page.has_link? I18n.t('bulletin_moderation'), href: '#'
 
@@ -26,24 +106,22 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     assert page.has_selector? 'th',
                               text: I18n.t('web.admin.bulletins.index.actions')
 
-    within(find_link(@first_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@first_bulletin.created_at)
-      assert page.has_content? 'Published'
-      assert find_link('', href: edit_bulletin_path(@first_bulletin))
-      assert find_link('', href: bulletin_path(@first_bulletin))
+    within(find_link(@under_moderation_bulletin.title).find(:xpath, '../..')) do
+      assert page.has_content? time_ago_in_words(@under_moderation_bulletin.created_at)
+      assert page.has_content? @under_moderation_bulletin.aasm.human_state
+      assert find_link('', href: admin_bulletin_publish_path(@under_moderation_bulletin))
+      assert find_link('', href: admin_bulletin_reject_path(@under_moderation_bulletin))
+      assert find_link('', href: admin_bulletin_archive_path(@under_moderation_bulletin))
 
-      assert page.has_selector? 'i.fa-solid.fa-pen-to-square.text-secondary'
-      assert page.has_selector? 'i.fa-solid.fa-trash.text-secondary'
+      assert page.has_selector? 'i.fa-solid.fa-check'
+      assert page.has_selector? 'i.fa-solid.fa-ban'
+      assert page.has_selector? 'i.fa-solid.fa-box-archive'
     end
 
-    within(find_link(@second_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@second_bulletin.created_at)
-      assert page.has_content? 'Published'
-      assert find_link('', href: edit_bulletin_path(@second_bulletin))
-      assert find_link('', href: bulletin_path(@second_bulletin))
-
-      assert page.has_selector? 'i.fa-solid.fa-pen-to-square.text-secondary'
-      assert page.has_selector? 'i.fa-solid.fa-trash.text-secondary'
-    end
+    assert page.has_no_selector? "a[href='#{bulletin_path(@draft_bulletin)}'", text: @draft_bulletin.title
+    assert page.has_no_selector? "a[href='#{bulletin_path(@published_bulletin)}'", text: @published_bulletin.title
+    assert page.has_no_selector? "a[href='#{bulletin_path(@rejected_bulletin)}'", text: @rejected_bulletin.title
+    assert page.has_no_selector? "a[href='#{bulletin_path(@archived_bulletin)}'", text: @archived_bulletin.title
   end
 end
+# rubocop:enable Metrics/ClassLength

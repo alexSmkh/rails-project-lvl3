@@ -15,3 +15,12 @@ two_image_blob:
   byte_size: <%= File.size(Rails.root.join('test', 'fixtures', 'files', 'two.png')) %>
   checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'two.png')).base64digest %>
   service_name: test
+
+three_image_blob:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: two.png
+  content_type: image/png
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: <%= File.size(Rails.root.join('test', 'fixtures', 'files', 'two.png')) %>
+  checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'two.png')).base64digest %>
+  service_name: test

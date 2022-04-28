@@ -15,7 +15,7 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
 
     assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: '#'
-    assert page.has_link? I18n.t('bulletin_moderation'), href: '#'
+    assert page.has_link? I18n.t('bulletin_moderation'), href: admin_moderation_path
 
     assert page.has_selector? 'th',
                               text: I18n.t('web.admin.categories.index.id')

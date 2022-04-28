@@ -6,7 +6,7 @@ class BulletinsTest < ApplicationSystemTestCase
   include ActionView::Helpers::DateHelper
 
   setup do
-    @first_bulletin = bulletins(:one)
+    @bulletin = bulletins(:three)
     @second_bulletin = bulletins(:one)
     @user = users(:one)
   end
@@ -16,18 +16,14 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'h1', text: I18n.t('bulletins')
 
-    assert page.has_link? @first_bulletin.title,
-                          href: bulletin_path(@first_bulletin)
-    assert page.has_link? @second_bulletin.title,
-                          href: bulletin_path(@second_bulletin)
+    assert page.has_link? @bulletin.title,
+                          href: bulletin_path(@bulletin)
 
-    assert page.has_content? @first_bulletin.description.truncate(100)
-    assert page.has_content? @second_bulletin.description.truncate(100)
+    assert page.has_content? @bulletin.description.truncate(100)
 
     assert page.has_selector? 'img'
 
-    assert page.has_content? posted_by(@first_bulletin)
-    assert page.has_content? posted_by(@second_bulletin)
+    assert page.has_content? posted_by(@bulletin)
   end
 
   test 'creating a bulletin' do
@@ -64,7 +60,7 @@ class BulletinsTest < ApplicationSystemTestCase
     sign_in @user
     category = categories(:two)
 
-    visit edit_bulletin_path(@first_bulletin)
+    visit edit_bulletin_path(@bulletin)
 
     updated_title = Faker::Commerce.product_name.capitalize
     updated_description = Faker::Lorem.paragraph(sentence_count: 5)
@@ -78,7 +74,7 @@ class BulletinsTest < ApplicationSystemTestCase
                 Rails.root.join('test', 'fixtures', 'files', 'two.png')
     click_on I18n.t('helpers.submit.bulletin.update')
 
-    assert_current_path bulletin_path(@first_bulletin)
+    assert_current_path bulletin_path(@bulletin)
 
     assert page.has_content? I18n.t('web.bulletins.update.successfully_updated')
     assert page.has_content? updated_title
@@ -91,19 +87,19 @@ class BulletinsTest < ApplicationSystemTestCase
   test 'visit the show bulletin page' do
     sign_in @user
 
-    visit bulletin_path(@first_bulletin)
+    visit bulletin_path(@bulletin)
 
-    assert page.has_content? @first_bulletin.title
-    assert page.has_content? @first_bulletin.description
-    assert page.has_content? @first_bulletin.user.name
-    assert page.has_content? @first_bulletin.category.name
+    assert page.has_content? @bulletin.title
+    assert page.has_content? @bulletin.description
+    assert page.has_content? @bulletin.user.name
+    assert page.has_content? @bulletin.category.name
     assert page.has_selector? 'img'
 
-    within("a[href='#{edit_bulletin_path(@first_bulletin)}']") do
+    within("a[href='#{edit_bulletin_path(@bulletin)}']") do
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
     end
 
-    within("a[href='#{bulletin_path(@first_bulletin)}']") do
+    within("a[href='#{bulletin_path(@bulletin)}']") do
       assert page.has_selector? 'i.fa-solid.fa-trash'
     end
   end
@@ -111,18 +107,18 @@ class BulletinsTest < ApplicationSystemTestCase
   test 'visit the edit bulletin page from the show page' do
     sign_in @user
 
-    visit bulletin_path(@first_bulletin)
+    visit bulletin_path(@bulletin)
 
-    click_link '', href: edit_bulletin_path(@first_bulletin)
-    assert_current_path edit_bulletin_path(@first_bulletin)
+    click_link '', href: edit_bulletin_path(@bulletin)
+    assert_current_path edit_bulletin_path(@bulletin)
   end
 
   test 'should show the dialog for destroying the bulletin' do
     sign_in @user
 
-    visit bulletin_path(@first_bulletin)
+    visit bulletin_path(@bulletin)
 
-    click_link '', href: bulletin_path(@first_bulletin)
+    click_link '', href: bulletin_path(@bulletin)
     dismiss_confirm
   end
 end

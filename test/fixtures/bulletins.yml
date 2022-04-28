@@ -5,9 +5,35 @@ one:
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one
   category: one
+  state: draft
 
 two:
   title: <%= Faker::Commerce.product_name.capitalize %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: two
   category: two
+  state: under_moderation
+
+three:
+  title: <%= Faker::Commerce.product_name.capitalize %>
+  description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
+  user: one
+  category: one
+  state: published
+
+four:
+  title: <%= Faker::Commerce.product_name.capitalize %>
+  description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
+  user: one
+  category: one
+  state: rejected
+
+five:
+  title: <%= Faker::Commerce.product_name.capitalize %>
+  description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
+  user: one
+  category: one
+  state: archived
+
+
+

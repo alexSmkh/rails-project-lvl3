@@ -17,8 +17,8 @@ class CategoriesTest < ApplicationSystemTestCase
     assert page.has_content? @first_category.name
     assert page.has_content? @second_category.name
 
-    assert page.has_content? "#{I18n.t('bulletins')}: #{@first_category.bulletins.size}"
-    assert page.has_content? "#{I18n.t('bulletins')}: #{@second_category.bulletins.size}"
+    assert page.has_content? "#{I18n.t('bulletins')}: #{@first_category.published_count}"
+    assert page.has_content? "#{I18n.t('bulletins')}: #{@second_category.published_count}"
 
     # Order test
     within('div.x-card-hover', match: :first) do
@@ -41,6 +41,8 @@ class CategoriesTest < ApplicationSystemTestCase
     assert page.has_selector? 'h1', text: @first_category.name
 
     @first_category.bulletins.each do |bulletin|
+      next unless bulletin.published?
+
       assert page.has_link? bulletin.title, href: bulletin_path(bulletin)
       assert page.has_content? bulletin.description.truncate(100)
       assert page.has_content? posted_by(bulletin)
