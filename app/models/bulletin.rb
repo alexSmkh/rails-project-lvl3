@@ -28,7 +28,7 @@ class Bulletin < ApplicationRecord
               less_than: 5.megabytes
             }
 
-  aasm :state, whiny_transitions: false do
+  aasm column: :state, whiny_transitions: false do
     state :draft, initial: true
     state :under_moderation
     state :published
@@ -42,7 +42,6 @@ class Bulletin < ApplicationRecord
 
     event :publish do
       transitions from: :under_moderation, to: :published
-      transitions from: :archived, to: :published
     end
 
     event :reject do
