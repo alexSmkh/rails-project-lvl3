@@ -7,15 +7,15 @@ module BulletinsHelper
     "#{t('posted_by')} #{user_link} #{time_ago}".html_safe
   end
 
-  def build_state_badge(state)
+  def build_state_badge(bulletin)
     badges = {
-      draft: -> { content_tag(:span, t("web.bulletins.states.#{state}"), class: 'badge x-badge-secondary') },
-      under_moderation: -> { content_tag(:span, t("web.bulletins.states.#{state}"), class: 'badge x-badge-info') },
-      published: -> { content_tag(:span, t("web.bulletins.states.#{state}"), class: 'badge x-badge-success') },
-      rejected: -> { content_tag(:span, t("web.bulletins.states.#{state}"), class: 'badge x-badge-danger') },
-      archived: -> { content_tag(:span, t("web.bulletins.states.#{state}"), class: 'badge x-badge-warning') }
+      draft: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-secondary') },
+      under_moderation: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-info') },
+      published: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-success') },
+      rejected: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-danger') },
+      archived: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-warning') }
     }
 
-    badges[state].call
+    badges[bulletin.aasm.current_state].call
   end
 end

@@ -33,7 +33,7 @@ hr
                         bulletin_path(bulletin),
                         class: 'x-text-underline-hover'
             td.text-center
-              = build_state_badge(bulletin.state.to_sym)
+              = build_state_badge(bulletin)
             td.text-center
               = time_ago_in_words(bulletin.created_at)
             td.text-center
@@ -63,13 +63,3 @@ hr
                           title: t('archive') do
                   span.badge.x-badge-warning
                     i.fa-solid.fa-box-archive
-
-              - if bulletin.state == 'archived'
-                = link_to admin_bulletin_publish_path(bulletin),
-                          method: :patch,
-                          class: 'ms-1',
-                          'data-bs-toggle': 'tooltip',
-                          'data-bs-placement': 'top',
-                          title: t('publish') do
-                  span.badge.x-badge-success
-                    i.fa-solid.fa-check

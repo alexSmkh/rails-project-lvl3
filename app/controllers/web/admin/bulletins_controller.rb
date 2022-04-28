@@ -19,7 +19,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.archive!
-      redirect_to admin_moderation_path, notice: t('.success')
+      redirect_back fallback_location: admin_bulletins_path, notice: t('.success')
     else
       redirect_back fallback_location: admin_bulletins_path, alert: t('.failed')
     end
@@ -30,7 +30,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.reject!
-      redirect_to admin_moderation_path, notice: t('.success')
+      redirect_back fallback_location: admin_bulletins_path, notice: t('.success')
     else
       redirect_back fallback_location: admin_bulletins_path, alert: t('.failed')
     end
@@ -41,7 +41,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.publish!
-      redirect_to admin_moderation_path, notice: t('.success')
+      redirect_back fallback_location: admin_bulletins_path, notice: t('.success')
     else
       redirect_back fallback_location: admin_bulletins_path, alert: t('.failed')
     end
