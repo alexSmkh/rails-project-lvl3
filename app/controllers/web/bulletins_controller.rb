@@ -52,7 +52,29 @@ class Web::BulletinsController < Web::ApplicationController
     authorize @bulletin
     @bulletin.destroy
 
-    redirect_to bulletins_path, notice: t('.successfully_destroyed')
+    redirect_back fallback_location: root_path, notice: t('.successfully_destroyed')
+  end
+
+  def archive
+    bulletin = Bulletin.find(params[:bulletin_id])
+    authorize bulletin
+
+    if bulletin.archive!
+      redirect_back fallback_location: bulletins_path, notice: t('.success')
+    else
+      redirect_back fallback_location: bulletins_path, alert: t('.failed')
+    end
+  end
+
+  def moderate
+    bulletin = Bulletin.find(params[:bulletin_id])
+    authorize bulletin
+
+    if bulletin.moderate!
+      redirect_back fallback_location: bulletins_path, notice: t('.success')
+    else
+      redirect_back fallback_location: bulletins_path, alert: t('.failed')
+    end
   end
 
   private

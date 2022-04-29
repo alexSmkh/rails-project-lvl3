@@ -8,9 +8,14 @@ Rails.application.routes.draw do
     get 'sessions/new', as: 'new_session'
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
-    resources :bulletins
+    resources :bulletins do
+      patch 'archive', to: 'bulletins#archive'
+      patch 'moderate', to: 'bulletins#moderate'
+    end
 
     resources :categories, only: %i[index show]
+
+    get :profile, to: 'profiles#index'
 
     namespace :admin do
       resources :categories, except: :show

@@ -1,0 +1,8 @@
+en:
+  web:
+    profiles:
+      index:
+        actions: Actions
+        date: Creation date
+        title: Title
+        status: Status

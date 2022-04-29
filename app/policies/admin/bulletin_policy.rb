@@ -14,7 +14,7 @@ class Admin::BulletinPolicy < ApplicationPolicy
   end
 
   def archive?
-    user&.admin?
+    user&.id == record.id || user&.admin?
   end
 
   def publish?

@@ -17,6 +17,12 @@ en:
         successfully_updated: Bulletin was successfully updated
       destroy:
         successfully_destroyed: Bulletin was successfully destroyed
+      archive:
+        success: The bulletin has been successfully archived
+        failed: The bulletin was not archived. Please try again
+      moderate:
+        success: The bulletin has been successfully sent for moderation
+        failed: The bulletin was not sent for moderation. Please try again
     admin:
       bulletins:
         index:
@@ -39,5 +45,9 @@ en:
         archive:
           success: The bulletin has been successfully archived
           failed: The bulletin was not archived. Please try again
+        moderate:
+          success: The bulletin has been successfully sent for moderation
+          failed: The bulletin was not sent for moderation. Please try again
+
 
 
