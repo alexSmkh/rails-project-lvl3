@@ -10,6 +10,9 @@ en:
   delete: Delete
   edit: Edit
   search: Search
+  search_by_category: Search by category
+  search_by_status: Search by status
+  search_by_title: Search by title
   select_category: Select Category
   show: Show
   sign_in: Sign in
