@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  before_save :capitalize_name
-
   has_many :bulletins, dependent: :destroy
 
   validates :name, presence: true
-
-  private
-
-  def capitalize_name
-    name.capitalize!
-  end
 end
