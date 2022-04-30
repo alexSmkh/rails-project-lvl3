@@ -7,15 +7,16 @@ en:
   categories: Categories
   create_bulletin: Create Bulletin
   create_cagegory: Create Categoryadmin_edit_category
-  edit: Edit
   delete: Delete
-  bulletin_moderation: Bulletin in moderation
+  edit: Edit
+  search: Search
   select_category: Select Category
+  show: Show
   sign_in: Sign in
   sign_in_with: Sign in with
   sign_out: Sign out
-  show: Show
   posted_by: Posted by
+  reset: Reset
 
   messages:
     already_signed_in: You are already signed in

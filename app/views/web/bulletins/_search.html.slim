@@ -1,0 +1,16 @@
+= search_form_for @q, builder: SimpleForm::FormBuilder do |f|
+  .d-flex
+    .me-2
+      = f.input :title_cont, id: 'search_bulletin_title', label: false
+      .form-text id='search_bulletin_title' = t('search_by_title')
+
+    .me-2
+      = f.input :category_id_eq,
+                collection: @categories,
+                id: 'search_bulletin_category',
+                label: false
+      .form-text id='search_bulletin_title' = t('search_by_category')
+
+    div
+      = f.submit t('search'), class: 'btn btn-primary me-1'
+      = link_to t('reset'), root_path, class: 'btn btn-outline-secondary'

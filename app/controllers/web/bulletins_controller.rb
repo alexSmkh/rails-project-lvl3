@@ -4,9 +4,9 @@ class Web::BulletinsController < Web::ApplicationController
   before_action :set_nav_categories, only: %i[index show new edit]
 
   def index
-    @bulletins = Bulletin.includes(:user, { image_attachment: :blob })
-                         .published
-                         .order(created_at: :desc)
+    @q = Bulletin.published.order(created_at: :desc).ransack(params[:q])
+    @categories = Category.order(name: :asc)
+    @bulletins = @q.result.includes(:user, { image_attachment: :blob })
   end
 
   def show
@@ -52,7 +52,8 @@ class Web::BulletinsController < Web::ApplicationController
     authorize @bulletin
     @bulletin.destroy
 
-    redirect_back fallback_location: root_path, notice: t('.successfully_destroyed')
+    redirect_back fallback_location: root_path,
+                  notice: t('.successfully_destroyed')
   end
 
   def archive

@@ -7,6 +7,9 @@ en:
         published: Published
         rejected: Rejected
         archived: Archived
+      index:
+        search_by_bulletin_categoty: Search by category
+        search_by_bulletin_title: Search by bulletin title
       new:
         title: New Bulletin
       create:
