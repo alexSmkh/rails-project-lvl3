@@ -8,8 +8,6 @@ class Bulletin < ApplicationRecord
   scope :published,
         -> { where 'bulletins.state = ?', 'published' }
 
-  before_save :capitalize_title
-
   belongs_to :user
   belongs_to :category, counter_cache: true
   counter_culture :category,
@@ -54,11 +52,5 @@ class Bulletin < ApplicationRecord
       transitions from: :rejected, to: :archived
       transitions from: :published, to: :archived
     end
-  end
-
-  private
-
-  def capitalize_title
-    title.capitalize!
   end
 end
