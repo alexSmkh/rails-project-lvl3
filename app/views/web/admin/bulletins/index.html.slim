@@ -60,6 +60,6 @@ hr
                           class: 'ms-1',
                           'data-bs-toggle': 'tooltip',
                           'data-bs-placement': 'top',
-                          title: t('archive') do
+                          title: Bulletin.aasm.human_event_name(:archive) do
                   span.badge.x-badge-warning
                     i.fa-solid.fa-box-archive
