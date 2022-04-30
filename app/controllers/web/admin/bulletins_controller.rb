@@ -4,7 +4,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   def index
     authorize Bulletin, policy_class: Admin::BulletinPolicy
     @q = Bulletin.order(created_at: :desc).ransack(params[:q])
-    @bulletins = @q.result
+    @bulletins = @q.result.page(params[:page])
     @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
     set_nav_categories
   end
@@ -12,12 +12,13 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   def moderation
     authorize Bulletin, policy_class: Admin::BulletinPolicy
 
-    @bulletins = Bulletin.where(state: Bulletin::STATE_UNDER_MODERATION.to_s).order(created_at: :desc)
+    @q = Bulletin.where(state: Bulletin::STATE_UNDER_MODERATION.to_s).order(created_at: :desc).ransack(params[:q])
+    @bulletins = @q.result.page(params[:page])
     set_nav_categories
   end
 
   def archive
-    bulletin = Bulletin.find(bulletin_params[:bulletin_id])
+    bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.archive!
@@ -28,7 +29,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def reject
-    bulletin = Bulletin.find(bulletin_params[:bulletin_id])
+    bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.reject!
@@ -39,7 +40,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def publish
-    bulletin = Bulletin.find(bulletin_params[:bulletin_id])
+    bulletin = Bulletin.find(params[:bulletin_id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.publish!
@@ -47,11 +48,5 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     else
       redirect_back fallback_location: admin_bulletins_path, alert: t('.failed')
     end
-  end
-
-  private
-
-  def bulletin_params
-    params.permit(:bulletin_id)
   end
 end

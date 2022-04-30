@@ -4,7 +4,8 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   before_action :set_nav_categories, except: :destroy
 
   def index
-    @categories = Category.order(:name)
+    @q = Category.order(:name).ransack(params[:q])
+    @categories = @q.result.page(params[:page])
     authorize :category, policy_class: Admin::CategoryPolicy
   end
 

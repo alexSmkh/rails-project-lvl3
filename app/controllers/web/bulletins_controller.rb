@@ -6,7 +6,7 @@ class Web::BulletinsController < Web::ApplicationController
   def index
     @q = Bulletin.published.order(created_at: :desc).ransack(params[:q])
     @categories = Category.order(name: :asc)
-    @bulletins = @q.result.includes(:user, { image_attachment: :blob })
+    @bulletins = @q.result.includes(:user, { image_attachment: :blob }).page(params[:page]).per(8)
   end
 
   def show

@@ -5,6 +5,10 @@
     .col
       = render 'search'
 
-  .row
+  .row.mb-3
     - @bulletins.each do |bulletin|
       = render 'bulletin_card', bulletin: bulletin
+
+  = paginate @bulletins,
+             theme: 'bootstrap-5',
+             pagination_class: 'pagination-sm flex-wrap justify-content-center'

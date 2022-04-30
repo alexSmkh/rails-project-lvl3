@@ -62,3 +62,8 @@ hr
                         title: Bulletin.aasm.human_event_name(:archive) do
                 span.badge.x-badge-warning
                   i.fa-solid.fa-box-archive
+        tr
+          td.p-3 colspan='4'
+            = paginate @bulletins,
+                         theme: 'bootstrap-5',
+                         pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'

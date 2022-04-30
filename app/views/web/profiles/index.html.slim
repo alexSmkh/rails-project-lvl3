@@ -3,59 +3,64 @@
   hr
   .mb-3
     = render 'search'
-.shadow.rounded.table-responsive
-  table.table.align-middle
-    thead
-      tr
-        th = t('.title')
-        th.text-center = t('.status')
-        th.text-center = t('.date')
-        th.text-center = t('.actions')
-    tbody
-      - @bulletins.each do |bulletin|
+
+  .shadow.rounded.table-responsive
+    table.table.align-middle
+      thead
         tr
-          td
-            = link_to bulletin.title,
-                      bulletin_path(bulletin),
-                      class: 'x-text-underline-hover'
-          td.text-center
-            = build_state_badge(bulletin)
-          td.text-center
-            = time_ago_in_words(bulletin.created_at)
-          td.text-center
-            - if [Bulletin::STATE_DRAFT, Bulletin::STATE_REJECTED].include?(bulletin.aasm.current_state)
-              = link_to bulletin_moderate_path(bulletin),
-                        method: :patch,
-                        'data-bs-toggle': 'tooltip',
-                        'data-bs-placement': 'top',
-                        title: Bulletin.aasm.human_event_name(:moderate) do
-                span.badge.x-badge-info
-                  i.fa-solid.fa-dragon
+          th = t('.title')
+          th.text-center = t('.status')
+          th.text-center = t('.date')
+          th.text-center = t('.actions')
+      tbody
+        - @bulletins.each do |bulletin|
+          tr
+            td
+              = link_to bulletin.title,
+                        bulletin_path(bulletin),
+                        class: 'x-text-underline-hover'
+            td.text-center
+              = build_state_badge(bulletin)
+            td.text-center
+              = time_ago_in_words(bulletin.created_at)
+            td.text-center
+              - if [Bulletin::STATE_DRAFT, Bulletin::STATE_REJECTED].include?(bulletin.aasm.current_state)
+                = link_to bulletin_moderate_path(bulletin),
+                          method: :patch,
+                          'data-bs-toggle': 'tooltip',
+                          'data-bs-placement': 'top',
+                          title: Bulletin.aasm.human_event_name(:moderate) do
+                  span.badge.x-badge-info
+                    i.fa-solid.fa-dragon
 
-            = link_to edit_bulletin_path(bulletin),
-                      class: 'ms-1',
-                      'data-bs-toggle': 'tooltip',
-                      'data-bs-placement': 'top',
-                      title: t('edit') do
-              span.badge.x-badge-secondary
-                i.fa-solid.fa-pen-to-square
-
-            = link_to bulletin_path(bulletin),
-                      method: :delete,
-                      data: { confirm: t('messages.are_you_sure') },
-                      class: 'ms-1',
-                      'data-bs-toggle': 'tooltip',
-                      'data-bs-placement': 'top',
-                      title: t('delete') do
-              span.badge.x-badge-danger
-                i.fa-solid.fa-trash
-
-            - unless bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED
-              = link_to bulletin_archive_path(bulletin),
-                        method: :patch,
+              = link_to edit_bulletin_path(bulletin),
                         class: 'ms-1',
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
-                        title: Bulletin.aasm.human_event_name(:archive) do
-                span.badge.x-badge-warning
-                  i.fa-solid.fa-box-archive
+                        title: t('edit') do
+                span.badge.x-badge-secondary
+                  i.fa-solid.fa-pen-to-square
+
+              = link_to bulletin_path(bulletin),
+                        method: :delete,
+                        data: { confirm: t('messages.are_you_sure') },
+                        class: 'ms-1',
+                        'data-bs-toggle': 'tooltip',
+                        'data-bs-placement': 'top',
+                        title: t('delete') do
+                span.badge.x-badge-danger
+                  i.fa-solid.fa-trash
+
+              - unless bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED
+                = link_to bulletin_archive_path(bulletin),
+                          method: :patch,
+                          class: 'ms-1',
+                          'data-bs-toggle': 'tooltip',
+                          'data-bs-placement': 'top',
+                          title: Bulletin.aasm.human_event_name(:archive) do
+                  span.badge.x-badge-warning
+                    i.fa-solid.fa-box-archive
+
+  = paginate @bulletins,
+             theme: 'bootstrap-5',
+             pagination_class: 'pagination-sm flex-wrap justify-content-center'

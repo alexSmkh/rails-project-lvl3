@@ -55,3 +55,9 @@ hr
                         'data-bs-placement': 'top',
                         title: t('delete') do
                 i.fa-solid.fa-trash.text-secondary
+
+        tr
+          td.p-3 colspan='3'
+            = paginate @categories,
+                         theme: 'bootstrap-5',
+                         pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'
