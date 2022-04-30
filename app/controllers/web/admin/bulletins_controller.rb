@@ -3,7 +3,9 @@
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   def index
     authorize Bulletin, policy_class: Admin::BulletinPolicy
-    @bulletins = Bulletin.order(created_at: :desc)
+    @q = Bulletin.order(created_at: :desc).ransack(params[:q])
+    @bulletins = @q.result
+    @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
     set_nav_categories
   end
 

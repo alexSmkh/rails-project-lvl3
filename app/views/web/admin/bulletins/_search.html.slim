@@ -1,0 +1,16 @@
+= search_form_for @q, url: admin_bulletins_path, builder: SimpleForm::FormBuilder do |f|
+  .d-flex
+    .me-2
+      = f.input :title_cont, id: 'search_bulletin_by_title', label: false
+      .form-text id='search_bulletin_by_title' = t('search_by_title')
+
+    .me-2
+      = f.input :state_eq,
+                collection: @states,
+                id: 'search_bulletin_by_status',
+                label: false
+      .form-text id='search_bulletin_by_status' = t('search_by_status')
+
+    div
+      = f.submit t('search'), class: 'btn btn-primary me-1'
+      = link_to t('reset'), admin_bulletins_path, class: 'btn btn-outline-secondary'

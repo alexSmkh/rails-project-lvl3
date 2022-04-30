@@ -1,6 +1,10 @@
-h1 = t('bulletins')
-hr
 .container
+  h1 = t('bulletins')
+  hr
+
+  .row.mb-3
+    = render 'search'
+
   .row.mb-3.align-items-center
     .col.text-center.bg-primary.rounded
       = link_to t('bulletins'),
