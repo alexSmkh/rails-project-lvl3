@@ -60,7 +60,7 @@ class BulletinTest < ActiveSupport::TestCase
     )
     new_bulletin.image.attach(
       io: File.open(
-        Rails.root.join('test', 'fixtures', 'files', 'two.png')
+        Rails.root.join('test/fixtures/files/two.png')
       ),
       filename: 'two.png'
     )

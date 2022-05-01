@@ -41,7 +41,7 @@ class BulletinsTest < ApplicationSystemTestCase
     select category.name,
            from: I18n.t('simple_form.labels.bulletin.new.category')
     attach_file I18n.t('simple_form.labels.bulletin.new.image'),
-                Rails.root.join('test', 'fixtures', 'files', 'two.png')
+                Rails.root.join('test/fixtures/files/two.png')
     click_on I18n.t('helpers.submit.bulletin.create')
 
     new_bulletin = Bulletin.last
@@ -71,7 +71,7 @@ class BulletinsTest < ApplicationSystemTestCase
     select category.name,
            from: I18n.t('simple_form.labels.bulletin.new.category')
     attach_file I18n.t('simple_form.labels.bulletin.new.image'),
-                Rails.root.join('test', 'fixtures', 'files', 'two.png')
+                Rails.root.join('test/fixtures/files/two.png')
     click_on I18n.t('helpers.submit.bulletin.update')
 
     assert_current_path bulletin_path(@bulletin)
