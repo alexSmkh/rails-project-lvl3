@@ -13,13 +13,13 @@ class UserTest < ActiveSupport::TestCase
 
   test 'invalid user without name' do
     @user.name = nil
-    refute @user.valid?
+    assert_not @user.valid?
     assert_not_nil @user.errors[:name]
   end
 
   test 'invalid user without email' do
     @user.email = nil
-    refute @user.valid?
+    assert_not @user.valid?
     assert_not_nil @user.errors[:email]
   end
 end

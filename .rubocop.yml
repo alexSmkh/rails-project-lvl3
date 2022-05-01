@@ -6,13 +6,17 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.0.3
+  TargetRubyVersion: 3.0.2
   Exclude:
     - 'bin/**'
     - 'db/schema.rb'
     - 'db/migrate/**'
     - 'vendor/**/*'
     - 'node_modules/**/*'
+  SuggestExtensions: false
+
+Rails:
+  Enabled: true
 
 Style/ClassAndModuleChildren:
   Enabled: false

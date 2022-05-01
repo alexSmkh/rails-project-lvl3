@@ -6,7 +6,7 @@ class Bulletin < ApplicationRecord
   has_one_attached :image, dependent: :destroy
 
   scope :published,
-        -> { where 'bulletins.state = ?', 'published' }
+        -> { where(bulletins: { state: 'published' }) }
 
   belongs_to :user
   belongs_to :category, counter_cache: true

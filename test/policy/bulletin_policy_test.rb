@@ -41,12 +41,12 @@ class BulletinPolicyTest < ActiveSupport::TestCase
   end
 
   test 'for a guest' do
-    refute BulletinPolicy.new(@guest, @bulletin).new?
-    refute BulletinPolicy.new(@guest, @bulletin).create?
-    refute BulletinPolicy.new(@guest, @bulletin).edit?
-    refute BulletinPolicy.new(@guest, @bulletin).update?
-    refute BulletinPolicy.new(@guest, @bulletin).destroy?
-    refute Admin::BulletinPolicy.new(@guest, Bulletin).index?
+    assert_not BulletinPolicy.new(@guest, @bulletin).new?
+    assert_not BulletinPolicy.new(@guest, @bulletin).create?
+    assert_not BulletinPolicy.new(@guest, @bulletin).edit?
+    assert_not BulletinPolicy.new(@guest, @bulletin).update?
+    assert_not BulletinPolicy.new(@guest, @bulletin).destroy?
+    assert_not Admin::BulletinPolicy.new(@guest, Bulletin).index?
     assert { !Admin::BulletinPolicy.new(@guest, Bulletin).moderation? }
     assert { !Admin::BulletinPolicy.new(@guest, @bulletin).reject? }
     assert { !Admin::BulletinPolicy.new(@guest, @bulletin).publish? }

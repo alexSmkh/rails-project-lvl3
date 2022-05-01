@@ -14,31 +14,31 @@ class BulletinTest < ActiveSupport::TestCase
 
   test 'invalid without title' do
     @bulletin.title = nil
-    refute @bulletin.valid?
+    assert_not @bulletin.valid?
     assert_not_nil @bulletin.errors[:title]
   end
 
   test 'invalid without description' do
     @bulletin.description = nil
-    refute @bulletin.valid?
+    assert_not @bulletin.valid?
     assert_not_nil @bulletin.errors[:description]
   end
 
   test 'invalid without category' do
     @bulletin.category = nil
-    refute @bulletin.valid?
+    assert_not @bulletin.valid?
     assert_not_nil @bulletin.errors[:category]
   end
 
   test 'invalid without user' do
     @bulletin.user = nil
-    refute @bulletin.valid?
+    assert_not @bulletin.valid?
     assert_not_nil @bulletin.errors[:user]
   end
 
   test 'invalid without image' do
     @bulletin.image = nil
-    refute @bulletin.valid?
+    assert_not @bulletin.valid?
     assert_not_nil @bulletin.errors[:image]
   end
 

@@ -2,9 +2,13 @@
 
 module BulletinsHelper
   def posted_by(bulletin)
-    user_link = link_to bulletin.user.name, '#', class: 'fst-italic text-secondary fw-bolder x-text-underline-hover'
-    time_ago = time_ago_in_words bulletin.created_at
-    "#{t('posted_by')} #{user_link} #{time_ago}".html_safe
+    safe_join(
+      [
+        content_tag(:span, t('posted_by'), class: 'me-1'),
+        content_tag(:span, bulletin.user.name, class: 'fst-italic text-secondary fw-bolder me-1'),
+        content_tag(:span, time_ago_in_words(bulletin.created_at))
+      ]
+    )
   end
 
   def build_state_badge(bulletin)

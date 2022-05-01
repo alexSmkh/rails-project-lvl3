@@ -13,7 +13,7 @@ class CategoryTest < ActiveSupport::TestCase
 
   test 'invalid without name' do
     @category.name = nil
-    refute @category.valid?
+    assert_not @category.valid?
     assert_not_nil @category.errors[:name]
   end
 

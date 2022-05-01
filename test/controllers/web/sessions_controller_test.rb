@@ -20,6 +20,6 @@ class Web::SessionsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
     delete session_path
 
-    refute signed_in?
+    assert_not signed_in?
   end
 end
