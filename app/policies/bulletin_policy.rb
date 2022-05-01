@@ -2,7 +2,7 @@
 
 class BulletinPolicy < ApplicationPolicy
   def show?
-    return true if record.state == Bulletin::STATE_PUBLISHED
+    return true if record.aasm.current_state == Bulletin::STATE_PUBLISHED
 
     record.user_id == user&.id || user&.admin?
   end
