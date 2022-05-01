@@ -57,7 +57,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def archive
-    bulletin = Bulletin.find(params[:bulletin_id])
+    bulletin = Bulletin.find(params[:id])
     authorize bulletin
 
     if bulletin.archive!
@@ -68,7 +68,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def moderate
-    bulletin = Bulletin.find(params[:bulletin_id])
+    bulletin = Bulletin.find(params[:id])
     authorize bulletin
 
     if bulletin.moderate!

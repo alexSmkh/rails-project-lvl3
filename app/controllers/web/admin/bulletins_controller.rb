@@ -18,7 +18,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def archive
-    bulletin = Bulletin.find(params[:bulletin_id])
+    bulletin = Bulletin.find(params[:id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.archive!
@@ -29,7 +29,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def reject
-    bulletin = Bulletin.find(params[:bulletin_id])
+    bulletin = Bulletin.find(params[:id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.reject!
@@ -40,7 +40,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   end
 
   def publish
-    bulletin = Bulletin.find(params[:bulletin_id])
+    bulletin = Bulletin.find(params[:id])
     authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.publish!
