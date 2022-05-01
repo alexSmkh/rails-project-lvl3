@@ -59,7 +59,7 @@
                   i.fa-solid.fa-trash
 
               - unless bulletin.state == 'archived'
-                = link_to admin_bulletin_archive_path(bulletin),
+                = link_to archive_admin_bulletin_path(bulletin),
                           method: :patch,
                           class: 'ms-1',
                           'data-bs-toggle': 'tooltip',

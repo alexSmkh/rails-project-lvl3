@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     delete 'sessions', to: 'sessions#destroy', as: 'session'
 
     resources :bulletins do
-      patch 'archive', to: 'bulletins#archive'
-      patch 'moderate', to: 'bulletins#moderate'
+      patch 'archive', on: :member
+      patch 'moderate', on: :member
     end
 
     resources :categories, only: %i[index show]
@@ -20,9 +20,9 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :categories, except: :show
       resources :bulletins, only: :index do
-        patch 'archive', to: 'bulletins#archive'
-        patch 'reject', to: 'bulletins#reject'
-        patch 'publish', to: 'bulletins#publish'
+        patch 'archive', on: :member
+        patch 'reject', on: :member
+        patch 'publish', on: :member
       end
       get 'admin', to: 'bulletins#moderation', as: 'moderation'
     end
