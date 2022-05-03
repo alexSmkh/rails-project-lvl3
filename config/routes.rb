@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :categories, except: :show
-      resources :bulletins, only: :index do
+      resources :bulletins, only: %i[index destroy] do
         patch 'archive', on: :member
         patch 'reject', on: :member
         patch 'publish', on: :member

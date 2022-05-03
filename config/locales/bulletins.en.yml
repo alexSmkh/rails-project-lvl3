@@ -34,6 +34,8 @@ en:
           date: Creation date
           title: Title
           status: Status
+        destroy:
+          successfully_destroyed: Bulletin was successfully destroyed
         moderation:
           actions: Actions
           date: Creation date

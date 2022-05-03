@@ -8,6 +8,15 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
   end
 
+  def destroy
+    @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin, policy_class: Admin::BulletinPolicy
+    @bulletin.destroy
+
+    redirect_back fallback_location: admin_bulletins_path,
+                  notice: t('.successfully_destroyed')
+  end
+
   def moderation
     authorize Bulletin, policy_class: Admin::BulletinPolicy
 

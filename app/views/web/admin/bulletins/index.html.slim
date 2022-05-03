@@ -48,7 +48,7 @@
                 span.badge.x-badge-secondary
                   i.fa-solid.fa-pen-to-square
 
-              = link_to bulletin_path(bulletin),
+              = link_to admin_bulletin_path(bulletin),
                         method: :delete,
                         data: { confirm: t('messages.are_you_sure') },
                         class: 'ms-1',

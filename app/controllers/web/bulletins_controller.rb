@@ -50,8 +50,7 @@ class Web::BulletinsController < Web::ApplicationController
     authorize @bulletin
     @bulletin.destroy
 
-    redirect_back fallback_location: root_path,
-                  notice: t('.successfully_destroyed')
+    redirect_to root_path, notice: t('.successfully_destroyed')
   end
 
   def archive

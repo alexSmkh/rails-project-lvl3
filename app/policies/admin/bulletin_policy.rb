@@ -5,6 +5,10 @@ class Admin::BulletinPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def destroy?
+    user&.admin?
+  end
+
   def moderation?
     user&.admin?
   end
