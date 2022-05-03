@@ -6,6 +6,5 @@ class Web::ProfilesController < Web::ApplicationController
     authorize @bulletins, policy_class: Profile::BulletinPolicy
     @bulletins = @q.result.page(params[:page])
     @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
-    set_nav_categories
   end
 end

@@ -1,9 +1,7 @@
 .border-bottom.mb-4
   .row.mb-2
     .col
-      = link_to bulletin.category.name,
-                category_path(bulletin.category),
-                class: 'fs-5 text-body x-text-underline-hover'
+      span.fs-6.badge.x-badge-warning = bulletin.category.name
 
     .col.text-end
       - if policy(bulletin).edit?
@@ -12,7 +10,7 @@
       - if policy(bulletin).destroy?
           = link_to bulletin_path(bulletin),
                     method: :delete,
-                    data: { confirm: t('messages.are_you_shure') } do
+                    data: { confirm: t('messages.are_you_sure') } do
             i.fa-solid.fa-trash.text-secondary.ms-2
 
   .row.mb-2

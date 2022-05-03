@@ -25,31 +25,7 @@ html
       nav.row.py-2.px-4.align-items-center
         .col-1.me-2
           = link_to root_path, class: 'fs-3' do
-            i.fa-solid.fa-house
-
-        .col-lg-3.col-md-4.col-6
-          .dropdown.border.border-secondary.rounded.align-bottom
-            button(
-              class='btn btn-sm btn-outline dropdown-toggle w-100 text-secondary overflow-hidden'
-              id='category-dropdown'
-              data-bs-toggle='dropdown'
-              aria-label='false'
-            )
-              - if content_for?(:category_name)
-                = (yield :category_name).truncate(15)
-              - else
-                = t('select_category')
-            ul.dropdown-menu.w-100.overflow-hidden aria-labelledby='category-dropdown'
-              li
-                = link_to t('all'), categories_path,
-                                 class: 'dropdown-item text-secondary'
-
-              - @nav_categories.each do |category|
-                - next if category.name == (yield :category_name)
-                li
-                  = link_to category.name,
-                            category_path(category),
-                            class: 'dropdown-item text-secondary'
+            i.fa-solid.fa-house 
 
         - if signed_in?
           .col

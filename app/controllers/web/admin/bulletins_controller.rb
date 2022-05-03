@@ -6,7 +6,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     @q = Bulletin.order(created_at: :desc).ransack(params[:q])
     @bulletins = @q.result.page(params[:page])
     @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
-    set_nav_categories
   end
 
   def moderation
@@ -14,7 +13,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     @q = Bulletin.where(state: Bulletin::STATE_UNDER_MODERATION.to_s).order(created_at: :desc).ransack(params[:q])
     @bulletins = @q.result.page(params[:page])
-    set_nav_categories
   end
 
   def archive

@@ -6,12 +6,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  protected
-
-  def set_nav_categories
-    @nav_categories = Category.order(:name)
-  end
-
   private
 
   def user_not_authorized
