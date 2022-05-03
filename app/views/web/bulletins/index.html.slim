@@ -6,8 +6,15 @@
       = render 'search'
 
   .row.mb-3
-    - @bulletins.each do |bulletin|
-      = render 'bulletin_card', bulletin: bulletin
+    - if @bulletins.empty?
+      .col.text-center.h-100.shadow-lg.p-5.align_middle
+        h2 = t('.no_found')
+        = link_to new_bulletin_path, class: 'btn btn-sm text-primary' do
+          i.fa-solid.fa-plus.me-md-2.fa-lg
+          span.d-none.d-md-inline-block.align-middle = t('create_bulletin')
+    - else
+        - @bulletins.each do |bulletin|
+          = render 'bulletin_card', bulletin: bulletin
 
   = paginate @bulletins,
              theme: 'bootstrap-5',

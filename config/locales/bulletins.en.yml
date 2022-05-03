@@ -10,6 +10,7 @@ en:
       index:
         search_by_bulletin_categoty: Search by category
         search_by_bulletin_title: Search by bulletin title
+        no_found: No bulletins found
       new:
         title: New Bulletin
       create:
