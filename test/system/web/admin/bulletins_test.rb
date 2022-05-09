@@ -34,7 +34,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
       assert page.has_content? @draft_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@draft_bulletin))
       assert find_link('', href: bulletin_path(@draft_bulletin))
-      assert find_link('', href: admin_bulletin_archive_path(@draft_bulletin))
+      assert find_link('', href: archive_admin_bulletin_path(@draft_bulletin))
 
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
       assert page.has_selector? 'i.fa-solid.fa-trash'
@@ -46,7 +46,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
       assert page.has_content? @under_moderation_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@under_moderation_bulletin))
       assert find_link('', href: bulletin_path(@under_moderation_bulletin))
-      assert find_link('', href: admin_bulletin_archive_path(@under_moderation_bulletin))
+      assert find_link('', href: archive_admin_bulletin_path(@under_moderation_bulletin))
 
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
       assert page.has_selector? 'i.fa-solid.fa-trash'
@@ -58,7 +58,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
       assert page.has_content? @published_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@published_bulletin))
       assert find_link('', href: bulletin_path(@published_bulletin))
-      assert find_link('', href: admin_bulletin_archive_path(@published_bulletin))
+      assert find_link('', href: archive_admin_bulletin_path(@published_bulletin))
 
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
       assert page.has_selector? 'i.fa-solid.fa-trash'
@@ -70,7 +70,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
       assert page.has_content? @rejected_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@rejected_bulletin))
       assert find_link('', href: bulletin_path(@rejected_bulletin))
-      assert find_link('', href: admin_bulletin_archive_path(@rejected_bulletin))
+      assert find_link('', href: archive_admin_bulletin_path(@rejected_bulletin))
 
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
       assert page.has_selector? 'i.fa-solid.fa-trash'
@@ -82,7 +82,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
       assert page.has_content? @archived_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@archived_bulletin))
       assert find_link('', href: bulletin_path(@archived_bulletin))
-      assert page.has_no_selector? "a[href='#{admin_bulletin_archive_path(@archived_bulletin)}'"
+      assert page.has_no_selector? "a[href='#{archive_admin_bulletin_path(@archived_bulletin)}'"
 
       assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
       assert page.has_selector? 'i.fa-solid.fa-trash'
@@ -109,9 +109,9 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     within(find_link(@under_moderation_bulletin.title).find(:xpath, '../..')) do
       assert page.has_content? time_ago_in_words(@under_moderation_bulletin.created_at)
       assert page.has_content? @under_moderation_bulletin.aasm.human_state
-      assert find_link('', href: admin_bulletin_publish_path(@under_moderation_bulletin))
-      assert find_link('', href: admin_bulletin_reject_path(@under_moderation_bulletin))
-      assert find_link('', href: admin_bulletin_archive_path(@under_moderation_bulletin))
+      assert find_link('', href: publish_admin_bulletin_path(@under_moderation_bulletin))
+      assert find_link('', href: reject_admin_bulletin_path(@under_moderation_bulletin))
+      assert find_link('', href: archive_admin_bulletin_path(@under_moderation_bulletin))
 
       assert page.has_selector? 'i.fa-solid.fa-check'
       assert page.has_selector? 'i.fa-solid.fa-ban'

@@ -23,7 +23,9 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'img'
 
-    assert page.has_content? posted_by(@bulletin)
+    assert page.has_selector? 'span', text: I18n.t('posted_by')
+    assert page.has_selector? 'span.fst-italic.text-secondary.fw-bolder', text: @bulletin.user.name
+    assert page.has_selector? 'span', text: "#{time_ago_in_words(@bulletin.created_at)} #{I18n.t('ago').downcase}"
   end
 
   test 'creating a bulletin' do
@@ -89,7 +91,7 @@ class BulletinsTest < ApplicationSystemTestCase
 
     visit bulletin_path(@bulletin)
 
-    assert page.has_content? @bulletin.title
+    assert page.has_content? @bulletin.title.capitalize
     assert page.has_content? @bulletin.description
     assert page.has_content? @bulletin.user.name
     assert page.has_content? @bulletin.category.name

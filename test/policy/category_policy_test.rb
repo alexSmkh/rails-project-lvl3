@@ -19,18 +19,18 @@ class CategoryPolicyTest < ActiveSupport::TestCase
   end
 
   test 'for an user' do
-    assert { !Admin::CategoryPolicy.new(@user, @category).new? }
-    assert { !Admin::CategoryPolicy.new(@user, @category).create? }
-    assert { !Admin::CategoryPolicy.new(@user, @category).edit? }
-    assert { !Admin::CategoryPolicy.new(@user, @category).update? }
-    assert { !Admin::CategoryPolicy.new(@user, @category).destroy? }
+    assert_not Admin::CategoryPolicy.new(@user, @category).new?
+    assert_not Admin::CategoryPolicy.new(@user, @category).create?
+    assert_not Admin::CategoryPolicy.new(@user, @category).edit?
+    assert_not Admin::CategoryPolicy.new(@user, @category).update?
+    assert_not Admin::CategoryPolicy.new(@user, @category).destroy?
   end
 
   test 'for an guest' do
-    assert { !Admin::CategoryPolicy.new(@guest, @category).new? }
-    assert { !Admin::CategoryPolicy.new(@guest, @category).create? }
-    assert { !Admin::CategoryPolicy.new(@guest, @category).edit? }
-    assert { !Admin::CategoryPolicy.new(@guest, @category).update? }
-    assert { !Admin::CategoryPolicy.new(@guest, @category).destroy? }
+    assert_not Admin::CategoryPolicy.new(@guest, @category).new?
+    assert_not Admin::CategoryPolicy.new(@guest, @category).create?
+    assert_not Admin::CategoryPolicy.new(@guest, @category).edit?
+    assert_not Admin::CategoryPolicy.new(@guest, @category).update?
+    assert_not Admin::CategoryPolicy.new(@guest, @category).destroy?
   end
 end

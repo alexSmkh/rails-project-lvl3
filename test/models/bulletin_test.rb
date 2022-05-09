@@ -47,7 +47,7 @@ class BulletinTest < ActiveSupport::TestCase
     @bulletin.title = title
     @bulletin.save
 
-    assert { title.capitalize == @bulletin.title }
+    assert { title == @bulletin.title }
   end
 
   test 'capitalizing title when creating' do
@@ -66,7 +66,7 @@ class BulletinTest < ActiveSupport::TestCase
     )
     new_bulletin.save
 
-    assert { title.capitalize == new_bulletin.title }
+    assert { title == new_bulletin.title }
   end
 
   test 'default bulletin state' do

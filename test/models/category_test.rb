@@ -16,10 +16,4 @@ class CategoryTest < ActiveSupport::TestCase
     assert_not @category.valid?
     assert_not_nil @category.errors[:name]
   end
-
-  test 'capitalizing name when creating' do
-    name = 'name'
-    new_category = Category.create(name: name)
-    assert { new_category.name == name.capitalize }
-  end
 end

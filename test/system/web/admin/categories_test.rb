@@ -27,7 +27,7 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
     assert page.has_link? I18n.t('web.admin.categories.index.create'),
                           href: new_admin_category_path
 
-    within(find_link(@first_category.name).find(:xpath, '../..')) do
+    within(find('td', text: @first_category.name).find(:xpath, '../..')) do
       assert page.has_content? @first_category.id
       assert page.has_content? @first_category.name
       assert find_link('', href: edit_admin_category_path(@first_category))
@@ -37,7 +37,7 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
       assert page.has_selector? 'i.fa-solid.fa-trash.text-secondary'
     end
 
-    within(find_link(@second_category.name).find(:xpath, '../..')) do
+    within(find('td', text: @second_category.name).find(:xpath, '../..')) do
       assert page.has_content? @second_category.id
       assert page.has_content? @second_category.name
       assert find_link('', href: edit_admin_category_path(@second_category))

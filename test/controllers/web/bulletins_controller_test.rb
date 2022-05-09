@@ -84,9 +84,9 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'user should destroy bulletin' do
-    delete bulletin_url(@bulletin)
+    delete bulletin_url @bulletin
 
     assert_nil Bulletin.find_by(id: @bulletin.id)
-    assert_redirected_to bulletins_path
+    assert_redirected_to root_path
   end
 end
