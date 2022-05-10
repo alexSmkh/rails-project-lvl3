@@ -30,7 +30,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
                               text: I18n.t('web.admin.bulletins.index.actions')
 
     within(find_link(@draft_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@draft_bulletin.created_at)
+      assert page.has_content? @draft_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @draft_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@draft_bulletin))
       assert find_link('', href: bulletin_path(@draft_bulletin))
@@ -42,7 +42,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     end
 
     within(find_link(@under_moderation_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@under_moderation_bulletin.created_at)
+      assert page.has_content? @under_moderation_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @under_moderation_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@under_moderation_bulletin))
       assert find_link('', href: bulletin_path(@under_moderation_bulletin))
@@ -54,7 +54,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     end
 
     within(find_link(@published_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@published_bulletin.created_at)
+      assert page.has_content? @published_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @published_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@published_bulletin))
       assert find_link('', href: bulletin_path(@published_bulletin))
@@ -66,7 +66,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     end
 
     within(find_link(@rejected_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@rejected_bulletin.created_at)
+      assert page.has_content? @rejected_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @rejected_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@rejected_bulletin))
       assert find_link('', href: bulletin_path(@rejected_bulletin))
@@ -78,7 +78,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     end
 
     within(find_link(@archived_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@archived_bulletin.created_at)
+      assert page.has_content? @archived_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @archived_bulletin.aasm.human_state
       assert find_link('', href: edit_bulletin_path(@archived_bulletin))
       assert find_link('', href: bulletin_path(@archived_bulletin))
@@ -107,7 +107,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
                               text: I18n.t('web.admin.bulletins.index.actions')
 
     within(find_link(@under_moderation_bulletin.title).find(:xpath, '../..')) do
-      assert page.has_content? time_ago_in_words(@under_moderation_bulletin.created_at)
+      assert page.has_content? @under_moderation_bulletin.created_at.strftime('%H:%M %d/%m/%Y')
       assert page.has_content? @under_moderation_bulletin.aasm.human_state
       assert find_link('', href: publish_admin_bulletin_path(@under_moderation_bulletin))
       assert find_link('', href: reject_admin_bulletin_path(@under_moderation_bulletin))

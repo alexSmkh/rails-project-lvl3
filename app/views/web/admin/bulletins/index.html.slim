@@ -21,7 +21,7 @@
                   admin_moderation_path,
                   class: 'nav-link'
 
-  .shadow.rounded.table-responsive
+  .shadow.rounded.table-responsive.mb-4
     table.table.align-middle
       thead
         tr
@@ -39,7 +39,7 @@
             td.text-center
               = build_state_badge(bulletin)
             td.text-center
-              = time_ago_in_words(bulletin.created_at)
+              = bulletin.created_at.strftime('%H:%M %d/%m/%Y')
             td.text-center
               = link_to edit_bulletin_path(bulletin),
                         'data-bs-toggle': 'tooltip',
@@ -67,8 +67,8 @@
                           title: Bulletin.aasm.human_event_name(:archive) do
                   span.badge.x-badge-warning
                     i.fa-solid.fa-box-archive
-        tr
-          td.p-3 colspan='4'
-            = paginate @bulletins,
-                         theme: 'bootstrap-5',
-                         pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'
+
+  div
+    = paginate @bulletins,
+                 theme: 'bootstrap-5',
+                 pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'

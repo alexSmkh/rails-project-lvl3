@@ -33,8 +33,8 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
       assert find_link('', href: edit_admin_category_path(@first_category))
       assert find_link('', href: admin_category_path(@first_category))
 
-      assert page.has_selector? 'i.fa-solid.fa-pen-to-square.text-secondary'
-      assert page.has_selector? 'i.fa-solid.fa-trash.text-secondary'
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
     end
 
     within(find('td', text: @second_category.name).find(:xpath, '../..')) do
@@ -43,8 +43,8 @@ class Admin::CategoriesTest < ApplicationSystemTestCase
       assert find_link('', href: edit_admin_category_path(@second_category))
       assert find_link('', href: admin_category_path(@second_category))
 
-      assert page.has_selector? 'i.fa-solid.fa-pen-to-square.text-secondary'
-      assert page.has_selector? 'i.fa-solid.fa-trash.text-secondary'
+      assert page.has_selector? 'i.fa-solid.fa-pen-to-square'
+      assert page.has_selector? 'i.fa-solid.fa-trash'
     end
   end
 

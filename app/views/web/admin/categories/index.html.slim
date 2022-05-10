@@ -1,6 +1,7 @@
-h1 = t('categories')
-hr
 .container
+  h1 = t('categories')
+  hr
+
   .row.mb-3.align-items-center
     .col.text-center
       = link_to t('bulletins'),
@@ -17,25 +18,25 @@ hr
                   admin_moderation_path,
                   class: 'nav-link'
 
-  .shadow.rounded.overflow-hidden
+  .shadow.rounded.overflow-hidden.table-responsive.mb-4
     table.table.align-middle
       thead
         tr
-          th = t('.id')
-          th = t('.name')
+          th.ps-3 = t('.id')
+          th.text-center = t('.name')
           th.text-center = t('.actions')
       tbody
         tr
-          td colspan='3'
-            = link_to new_admin_category_path, class: 'btn btn-primary'
+          td.py-3 colspan='3'
+            = link_to new_admin_category_path, class: 'btn btn-outline-primary w-100'
               i.fa-solid.fa-plus.me-1
               = t('.create')
 
         - @categories.each do |category|
           tr
-            td
+            td.ps-3
               = category.id
-            td
+            td.text-center
               = category.name
             td.text-center
               = link_to edit_admin_category_path(category),
@@ -43,7 +44,8 @@ hr
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
-                i.fa-solid.fa-pen-to-square.text-secondary
+                span.badge.x-badge-secondary
+                  i.fa-solid.fa-pen-to-square
 
               = link_to admin_category_path(category),
                         method: :delete,
@@ -52,10 +54,10 @@ hr
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('delete') do
-                i.fa-solid.fa-trash.text-secondary
+                span.badge.x-badge-danger
+                  i.fa-solid.fa-trash
 
-        tr
-          td.p-3 colspan='3'
-            = paginate @categories,
-                         theme: 'bootstrap-5',
-                         pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'
+  div
+    = paginate @categories,
+               theme: 'bootstrap-5',
+               pagination_class: 'pagination-sm flex-wrap justify-content-center m-0'
