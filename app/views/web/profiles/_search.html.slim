@@ -1,15 +1,20 @@
 = search_form_for @q, url: profile_path, builder: SimpleForm::FormBuilder do |f|
   .d-flex
     .me-2
-      = f.input :title_cont, id: 'search_bulletin_by_title', label: false
-      .form-text id='search_bulletin_by_title' = t('search_by_title')
+      = f.input :title_cont,
+                label: false,
+                input_html: { id: t('search_by_title') }
+
+      .form-text
+        = t('search_by_title')
 
     .me-2
       = f.input :state_eq,
                 collection: @states,
-                id: 'search_bulletin_by_status',
-                label: false
-      .form-text id='search_bulletin_by_status' = t('search_by_status')
+                label: false,
+                input_html: { id: t('search_by_status') }
+
+      .form-text = t('search_by_status')
 
     div
       = f.submit t('search'), class: 'btn btn-primary me-1'
