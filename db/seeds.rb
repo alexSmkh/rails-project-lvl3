@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 users = []
-category_names = %w[Sport Books IT Cats Dogs]
+category_names = %w[Sport Books Cats Dogs Fruits]
 categories = []
+bulletin_states = [
+  Bulletin::STATE_DRAFT,
+  Bulletin::STATE_UNDER_MODERATION,
+  Bulletin::STATE_PUBLISHED,
+  Bulletin::STATE_REJECTED,
+  Bulletin::STATE_ARCHIVED
+]
 
 5.times do |i|
   users << User.create(
@@ -13,7 +20,7 @@ categories = []
   categories << Category.create(name: category_names[i])
 end
 
-15.times do
+45.times do
   category = categories.sample
 
   bulletin = Bulletin.new(
@@ -21,7 +28,7 @@ end
     description: Faker::Lorem.paragraph_by_chars(number: 1000),
     user: users.sample,
     category: category,
-    state: 'under_moderation'
+    state: bulletin_states.sample
   )
 
   url = Faker::LoremFlickr.image(size: '400x400', search_terms: [category.name])
