@@ -10,6 +10,7 @@ gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap5-kaminari-views'
 gem 'counter_culture', '~> 2.0'
+gem 'faker'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'omniauth-github', '~> 2.0'
@@ -28,7 +29,6 @@ gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'faker'
   gem 'prettier', '~> 2.0'
   gem 'rubocop', '~> 1.26'
   gem 'rubocop-performance', '~> 1.13'
