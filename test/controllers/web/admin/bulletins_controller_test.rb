@@ -54,4 +54,12 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to admin_bulletins_path
   end
+
+  test 'search bulletin' do
+    get admin_bulletins_path, params: {
+      q: @bulletin.title
+    }
+
+    assert_response :success
+  end
 end

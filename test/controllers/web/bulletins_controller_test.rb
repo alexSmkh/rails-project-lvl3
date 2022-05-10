@@ -107,4 +107,12 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert { @bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED }
     assert_redirected_to profile_path
   end
+
+  test 'search bulletin' do
+    get bulletins_path, params: {
+      q: @bulletin.title
+    }
+
+    assert_response :success
+  end
 end

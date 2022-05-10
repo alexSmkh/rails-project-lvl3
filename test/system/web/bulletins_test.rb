@@ -123,4 +123,19 @@ class BulletinsTest < ApplicationSystemTestCase
     click_link '', href: bulletin_path(@bulletin)
     dismiss_confirm
   end
+
+  test 'search bulletin' do
+    visit bulletins_path
+
+    fill_in(I18n.t('search_by_title'), with: @bulletin.title)
+    click_button I18n.t('search')
+    assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+
+    click_link I18n.t('reset')
+    assert_current_path root_path
+
+    select(@bulletin.category.name, from: I18n.t('search_by_category'))
+    click_button I18n.t('search')
+    assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+  end
 end

@@ -33,4 +33,19 @@ class ProfilesTest < ApplicationSystemTestCase
       assert page.has_selector? 'i.fa-solid.fa-box-archive'
     end
   end
+
+  test 'search bulletin' do
+    visit profile_path
+
+    fill_in(I18n.t('search_by_title'), with: @bulletin.title)
+    click_button I18n.t('search')
+    assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+
+    click_link I18n.t('reset')
+    assert_current_path profile_path
+
+    select(@bulletin.aasm.human_state, from: I18n.t('search_by_status'))
+    click_button I18n.t('search')
+    assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+  end
 end

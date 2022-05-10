@@ -123,5 +123,20 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
     assert page.has_no_selector? "a[href='#{bulletin_path(@rejected_bulletin)}'", text: @rejected_bulletin.title
     assert page.has_no_selector? "a[href='#{bulletin_path(@archived_bulletin)}'", text: @archived_bulletin.title
   end
+
+  test 'search bulletin' do
+    visit admin_bulletins_path
+
+    fill_in(I18n.t('search_by_title'), with: @under_moderation_bulletin.title)
+    click_button I18n.t('search')
+    assert page.has_link? @under_moderation_bulletin.title, href: bulletin_path(@under_moderation_bulletin)
+
+    click_link I18n.t('reset')
+    assert_current_path admin_bulletins_path
+
+    select(@under_moderation_bulletin.aasm.human_state, from: I18n.t('search_by_status'))
+    click_button I18n.t('search')
+    assert page.has_link? @under_moderation_bulletin.title, href: bulletin_path(@under_moderation_bulletin)
+  end
 end
 # rubocop:enable Metrics/ClassLength
