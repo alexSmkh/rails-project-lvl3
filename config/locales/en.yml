@@ -1,6 +1,7 @@
 en:
   admin: Admin
   all: All
+  ago: Ago
   back: Back
   bulletins: Bulletins
   bulletin_moderation: Bulletins in moderation
@@ -18,6 +19,7 @@ en:
   sign_in: Sign in
   sign_in_with: Sign in with
   sign_out: Sign out
+  profile: Profile
   posted_by: Posted by
   reset: Reset
 

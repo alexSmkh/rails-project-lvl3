@@ -89,4 +89,22 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_nil Bulletin.find_by(id: @bulletin.id)
     assert_redirected_to root_path
   end
+
+  test 'should send to the bulletin moderation' do
+    patch moderate_bulletin_path(@bulletin)
+
+    @bulletin.reload
+
+    assert { @bulletin.aasm.current_state == Bulletin::STATE_UNDER_MODERATION }
+    assert_redirected_to profile_path
+  end
+
+  test 'should archive bulletin' do
+    patch archive_bulletin_path(@bulletin)
+
+    @bulletin.reload
+
+    assert { @bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED }
+    assert_redirected_to profile_path
+  end
 end

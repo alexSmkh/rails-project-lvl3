@@ -6,7 +6,7 @@ module BulletinsHelper
       [
         content_tag(:span, t('posted_by'), class: 'me-1'),
         content_tag(:span, bulletin.user.name, class: 'fst-italic text-secondary fw-bolder me-1'),
-        content_tag(:span, "#{time_ago_in_words(bulletin.created_at)} ago")
+        content_tag(:span, "#{time_ago_in_words(bulletin.created_at)} #{t('ago').downcase}")
       ]
     )
   end

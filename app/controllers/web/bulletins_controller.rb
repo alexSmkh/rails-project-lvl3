@@ -58,9 +58,9 @@ class Web::BulletinsController < Web::ApplicationController
     authorize bulletin
 
     if bulletin.archive!
-      redirect_back fallback_location: bulletins_path, notice: t('.success')
+      redirect_back fallback_location: profile_path, notice: t('.success')
     else
-      redirect_back fallback_location: bulletins_path, alert: t('.failed')
+      redirect_back fallback_location: profile_path, alert: t('.failed')
     end
   end
 
@@ -69,9 +69,9 @@ class Web::BulletinsController < Web::ApplicationController
     authorize bulletin
 
     if bulletin.moderate!
-      redirect_back fallback_location: bulletins_path, notice: t('.success')
+      redirect_back fallback_location: profile_path, notice: t('.success')
     else
-      redirect_back fallback_location: bulletins_path, alert: t('.failed')
+      redirect_back fallback_location: profile_path, alert: t('.failed')
     end
   end
 
