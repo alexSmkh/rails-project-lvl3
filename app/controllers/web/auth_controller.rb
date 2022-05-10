@@ -6,6 +6,9 @@ class Web::AuthController < Web::ApplicationController
 
     user = User.find_or_initialize_by(email: auth_user_info[:email].downcase)
 
+    # As demo project https://rails-bulletin-board-ru.hexlet.app
+    user.admin = true
+
     unless user.name
       user.name = auth_user_info[:name] || auth_user_info[:nickname] || auth_user_info[:email].split('@').first
     end
