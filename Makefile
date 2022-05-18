@@ -1,5 +1,6 @@
 install:
 	bundle install
+	bundle exec rails webpacker:install
 
 lint:
 	bundle exec slim-lint app/views/
