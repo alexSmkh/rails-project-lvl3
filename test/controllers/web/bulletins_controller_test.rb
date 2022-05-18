@@ -6,7 +6,6 @@ require 'securerandom'
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @bulletin = bulletins(:one)
-    @bulletin_in_moderation = bulletins(:two)
     @category = categories(:one)
     @user = users(:one)
     sign_in @user
@@ -47,12 +46,6 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   test 'should show bulletin' do
     get bulletin_url(@bulletin)
     assert_response :success
-  end
-
-  test 'should not show bulletin if user is not creator/admin or bulletin state is not published' do
-    get bulletin_path(@bulletin_in_moderation)
-
-    assert_redirected_to root_path
   end
 
   test 'user should get edit' do

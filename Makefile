@@ -8,5 +8,6 @@ lint:
 format:
 	bundle exec rubocop . -A
 
-test:
+tests:
 	rake test
+	bin/rails test:system

@@ -8,7 +8,7 @@ two:
   record: two (Bulletin)
   blob: two_image_blob
 
-two:
+three:
   name: image
   record: three (Bulletin)
   blob: three_image_blob
