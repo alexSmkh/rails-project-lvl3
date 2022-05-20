@@ -14,7 +14,8 @@ en:
       new:
         title: New Bulletin
       create:
-        successfully_created: Bulletin was successfully created
+        success: Bulletin was successfully created
+        failed: Bulletin was not created. Please try again
       edit:
         title: Editing Bulletin
       update:

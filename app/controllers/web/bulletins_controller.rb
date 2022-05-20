@@ -23,9 +23,9 @@ class Web::BulletinsController < Web::ApplicationController
     authorize @bulletin
 
     if @bulletin.save
-      redirect_to bulletin_path(@bulletin), notice: t('.successfully_created')
+      redirect_to bulletin_path(@bulletin), notice: t('.success')
     else
-      render :new
+      render :new, alert: t('.failed')
     end
   end
 

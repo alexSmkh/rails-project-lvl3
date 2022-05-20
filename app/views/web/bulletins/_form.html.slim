@@ -1,4 +1,6 @@
 = simple_form_for @bulletin do |f|
+  = f.error_notification
+
   .mb-3
     = f.input :title
   .mb-3
@@ -6,7 +8,6 @@
   .mb-3
     = f.association :category
   .mb-5
-    = f.label :image, class: 'form-label'
-    = f.file_field :image, class: 'form-control'
+    = f.input :image, as: :file, input_html: { class: 'form-control' }
   .mb-3
     = f.submit class: 'btn btn-primary'
