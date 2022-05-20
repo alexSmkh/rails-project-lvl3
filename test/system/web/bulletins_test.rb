@@ -50,7 +50,7 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert_current_path bulletin_path(new_bulletin)
 
-    assert page.has_content? I18n.t('web.bulletins.create.successfully_created')
+    assert page.has_content? I18n.t('web.bulletins.create.success')
     assert page.has_content? title
     assert page.has_content? description
     assert page.has_selector? 'img'

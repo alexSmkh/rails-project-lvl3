@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         patch 'reject', on: :member
         patch 'publish', on: :member
       end
-      get 'admin', to: 'bulletins#moderation', as: 'moderation'
+      get 'moderation', to: 'bulletins#moderation', as: 'moderation'
     end
 
     root 'bulletins#index'
