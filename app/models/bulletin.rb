@@ -9,12 +9,7 @@ class Bulletin < ApplicationRecord
         -> { where(bulletins: { state: 'published' }) }
 
   belongs_to :user
-  belongs_to :category, counter_cache: true
-  counter_culture :category,
-                  column_name: ->(_model) { :published_count },
-                  column_names: {
-                    Bulletin.published => :published_count
-                  }
+  belongs_to :category
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 3000 }

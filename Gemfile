@@ -9,7 +9,6 @@ gem 'aasm', '~> 5.2'
 gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap5-kaminari-views'
-gem 'counter_culture', '~> 2.0'
 gem 'faker'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
