@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       patch 'moderate', on: :member
     end
 
-    get :profile, to: 'profiles#index'
+    resource :profile
 
     namespace :admin do
       resources :categories, except: :show

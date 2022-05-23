@@ -14,10 +14,10 @@ class ProfilesTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'h1', text: I18n.t('profile')
 
-    assert page.has_content? I18n.t('web.profiles.index.title')
-    assert page.has_content? I18n.t('web.profiles.index.status')
-    assert page.has_content? I18n.t('web.profiles.index.date')
-    assert page.has_content? I18n.t('web.profiles.index.actions')
+    assert page.has_content? I18n.t('web.profiles.show.title')
+    assert page.has_content? I18n.t('web.profiles.show.status')
+    assert page.has_content? I18n.t('web.profiles.show.date')
+    assert page.has_content? I18n.t('web.profiles.show.actions')
 
     within(find_link(@bulletin.title).find(:xpath, '../..')) do
       assert page.has_content? time_ago_in_words(@bulletin.created_at)

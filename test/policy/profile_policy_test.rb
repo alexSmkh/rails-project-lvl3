@@ -9,10 +9,10 @@ class ProfilePolicyTest < ActiveSupport::TestCase
   end
 
   test 'for an user' do
-    assert { Profile::BulletinPolicy.new(@user, Bulletin).index? }
+    assert { Profile::BulletinPolicy.new(@user, Bulletin).show? }
   end
 
   test 'for a guest' do
-    assert_not Profile::BulletinPolicy.new(@guest, Bulletin).index?
+    assert_not Profile::BulletinPolicy.new(@guest, Bulletin).show?
   end
 end
