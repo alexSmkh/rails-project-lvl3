@@ -7,6 +7,8 @@ class Bulletin < ApplicationRecord
 
   scope :published,
         -> { where(bulletins: { state: 'published' }) }
+  scope :under_moderation,
+        -> { where(bulletins: { state: 'under_moderation' }) }
 
   belongs_to :user
   belongs_to :category
