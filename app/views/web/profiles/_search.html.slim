@@ -2,19 +2,12 @@
   .d-flex
     .me-2
       = f.input :title_cont,
-                label: false,
-                input_html: { id: t('search_by_title') }
-
-      .form-text
-        = t('search_by_title')
+                label: false
 
     .me-2
       = f.input :state_eq,
                 collection: @states,
-                label: false,
-                input_html: { id: t('search_by_status') }
-
-      .form-text = t('search_by_status')
+                label: false
 
     div
       = f.submit t('search'), class: 'btn btn-primary me-1'

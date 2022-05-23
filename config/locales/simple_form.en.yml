@@ -17,3 +17,8 @@ en:
       category:
         new:
           name: Name
+    hints:
+        q:
+          category_id_eq: Search by category
+          title_cont: Search bulletin by title
+          state_eq: Search by status
