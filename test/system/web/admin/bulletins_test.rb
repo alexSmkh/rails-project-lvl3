@@ -5,18 +5,18 @@ require 'application_system_test_case'
 class Admin::BulletinsTest < ApplicationSystemTestCase
   setup do
     @admin = users(:admin)
-    @draft_bulletin = bulletins(:one)
-    @under_moderation_bulletin = bulletins(:two)
-    @published_bulletin = bulletins(:three)
-    @rejected_bulletin = bulletins(:four)
-    @archived_bulletin = bulletins(:five)
+    @draft_bulletin = bulletins(:draft)
+    @under_moderation_bulletin = bulletins(:under_moderation)
+    @published_bulletin = bulletins(:published)
+    @rejected_bulletin = bulletins(:rejected)
+    @archived_bulletin = bulletins(:archived)
     sign_in @admin
   end
 
   test 'visit the admin bulletins page' do
     visit admin_bulletins_path
 
-    assert page.has_link? I18n.t('bulletins'), href: '#'
+    assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: admin_categories_path
     assert page.has_link? I18n.t('bulletin_moderation'), href: admin_root_path
 
@@ -95,7 +95,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: admin_categories_path
-    assert page.has_link? I18n.t('bulletin_moderation'), href: '#'
+    assert page.has_link? I18n.t('bulletin_moderation'), href: admin_root_path
 
     assert page.has_selector? 'th',
                               text: I18n.t('web.admin.bulletins.index.title')
@@ -127,16 +127,26 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
   test 'search bulletin' do
     visit admin_bulletins_path
 
-    fill_in(I18n.t('search_by_title'), with: @under_moderation_bulletin.title)
+    fill_in('q_title_cont', with: @under_moderation_bulletin.title)
     click_button I18n.t('search')
+
     assert page.has_link? @under_moderation_bulletin.title, href: bulletin_path(@under_moderation_bulletin)
+    Bulletin.all.each do |bulletin|
+      next if bulletin.id == @under_moderation_bulletin.id
+
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
 
     click_link I18n.t('reset')
     assert_current_path admin_bulletins_path
 
-    select(@under_moderation_bulletin.aasm.human_state, from: I18n.t('search_by_status'))
+    select(@under_moderation_bulletin.aasm.human_state, from: 'q_state_eq')
     click_button I18n.t('search')
+
     assert page.has_link? @under_moderation_bulletin.title, href: bulletin_path(@under_moderation_bulletin)
+    Bulletin.where.not(state: @under_moderation_bulletin.state).each do |bulletin|
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
   end
 end
 # rubocop:enable Metrics/ClassLength

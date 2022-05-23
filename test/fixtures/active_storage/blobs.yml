@@ -1,4 +1,4 @@
-one_image_blob:
+draft_bulletin_image_blob:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: one.png
   content_type: image/png
@@ -7,7 +7,7 @@ one_image_blob:
   checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'one.png')).base64digest %>
   service_name: test
 
-two_image_blob:
+under_moderation_bulletin_image_blob:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: two.png
   content_type: image/png
@@ -16,7 +16,25 @@ two_image_blob:
   checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'two.png')).base64digest %>
   service_name: test
 
-three_image_blob:
+published_bulletin_image_blob:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: two.png
+  content_type: image/png
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: <%= File.size(Rails.root.join('test', 'fixtures', 'files', 'two.png')) %>
+  checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'two.png')).base64digest %>
+  service_name: test
+
+archived_bulletin_image_blob:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: two.png
+  content_type: image/png
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: <%= File.size(Rails.root.join('test', 'fixtures', 'files', 'two.png')) %>
+  checksum: <%= Digest::MD5.file(Rails.root.join('test', 'fixtures', 'files', 'two.png')).base64digest %>
+  service_name: test
+
+rejected_bulletin_image_blob:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: two.png
   content_type: image/png

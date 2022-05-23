@@ -1,34 +1,34 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+draft:
   title: <%= Faker::Commerce.unique.product_name %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one
   category: one
   state: draft
 
-two:
+under_moderation:
   title: <%= Faker::Commerce.unique.product_name %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: two
   category: two
   state: under_moderation
 
-three:
+published:
   title: <%= Faker::Commerce.unique.product_name %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one
   category: one
   state: published
 
-four:
+rejected:
   title: <%= Faker::Commerce.unique.product_name %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one
   category: one
   state: rejected
 
-five:
+archived:
   title: <%= Faker::Commerce.unique.product_name %>
   description: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
   user: one

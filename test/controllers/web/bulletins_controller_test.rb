@@ -5,7 +5,7 @@ require 'securerandom'
 
 class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @bulletin = bulletins(:one)
+    @bulletin = bulletins(:draft)
     @category = categories(:one)
     @user = users(:one)
     sign_in @user
@@ -21,7 +21,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'ser should create bulletin' do
+  test 'user should create bulletin' do
     bulletin = {
       category_id: @category.id,
       description: Faker::Lorem.paragraph(sentence_count: 5),
@@ -31,15 +31,9 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
     post bulletins_path, params: { bulletin: bulletin }
 
-    new_bulletin =
-      Bulletin.find_by(
-        title: bulletin[:title],
-        description: bulletin[:description],
-        category_id: @category.id
-      )
+    new_bulletin = Bulletin.find_by(bulletin.except(:image))
 
     assert_redirected_to bulletin_path(new_bulletin)
-    assert { new_bulletin.image.attached? }
     assert { new_bulletin }
   end
 
@@ -71,9 +65,13 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
     @bulletin.reload
 
-    assert { @bulletin.title == updated_title }
-    assert { @bulletin.description == updated_description }
-    assert { @bulletin.category_id == category_id }
+    updated_bulletin = Bulletin.find_by(
+      description: updated_description,
+      title: updated_title,
+      category_id: category_id
+    )
+
+    assert { @bulletin.id == updated_bulletin.id }
   end
 
   test 'user should destroy bulletin' do

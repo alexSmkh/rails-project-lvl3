@@ -2,12 +2,13 @@
 
 require 'application_system_test_case'
 
+# rubocop:disable Metrics/ClassLength
 class BulletinsTest < ApplicationSystemTestCase
   include ActionView::Helpers::DateHelper
 
   setup do
-    @bulletin = bulletins(:three)
-    @second_bulletin = bulletins(:one)
+    @bulletin = bulletins(:published)
+    @second_bulletin = bulletins(:draft)
     @user = users(:one)
   end
 
@@ -16,16 +17,18 @@ class BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_selector? 'h1', text: I18n.t('bulletins')
 
-    assert page.has_link? @bulletin.title,
-                          href: bulletin_path(@bulletin)
+    assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
 
     assert page.has_content? @bulletin.description.truncate(100)
 
     assert page.has_selector? 'img'
 
     assert page.has_selector? 'span', text: I18n.t('posted_by')
-    assert page.has_selector? 'span.fst-italic.text-secondary.fw-bolder', text: @bulletin.user.name
-    assert page.has_selector? 'span', text: "#{time_ago_in_words(@bulletin.created_at)} #{I18n.t('ago').downcase}"
+    assert page.has_selector? 'span.fst-italic.text-secondary.fw-bolder',
+                              text: @bulletin.user.name
+    assert page.has_selector? 'span',
+                              text:
+                                "#{time_ago_in_words(@bulletin.created_at)} #{I18n.t('ago').downcase}"
   end
 
   test 'creating a bulletin' do
@@ -127,15 +130,26 @@ class BulletinsTest < ApplicationSystemTestCase
   test 'search bulletin' do
     visit bulletins_path
 
-    fill_in(I18n.t('search_by_title'), with: @bulletin.title)
+    fill_in('q_title_cont', with: @bulletin.title)
     click_button I18n.t('search')
+
     assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+    Bulletin.published.each do |bulletin|
+      next if bulletin.id == @bulletin.id
+
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
 
     click_link I18n.t('reset')
     assert_current_path root_path
 
-    select(@bulletin.category.name, from: I18n.t('search_by_category'))
+    select(@bulletin.category.name, from: 'q_category_id_eq')
     click_button I18n.t('search')
+
     assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+    Bulletin.published.where.not(category: @bulletin.category.name).each do |bulletin|
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
   end
 end
+# rubocop:enable Metrics/ClassLength

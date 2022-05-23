@@ -1,14 +1,24 @@
-one:
+draft_bulletin_image_blob:
   name: image
-  record: one (Bulletin)
-  blob: one_image_blob
+  record: draft (Bulletin)
+  blob: draft_bulletin_image_blob
 
-two:
+under_moderation_bulletin_image:
   name: image
-  record: two (Bulletin)
-  blob: two_image_blob
+  record: under_moderation (Bulletin)
+  blob: under_moderation_bulletin_image_blob
 
-three:
+published_bulletin_image:
   name: image
-  record: three (Bulletin)
-  blob: three_image_blob
+  record: published (Bulletin)
+  blob: published_bulletin_image_blob
+
+rejected_bulletin_image:
+  name: image
+  record: published (Bulletin)
+  blob: rejected_bulletin_image_blob
+
+archived_bulletin_image:
+  name: image
+  record: published (Bulletin)
+  blob: archived_bulletin_image_blob

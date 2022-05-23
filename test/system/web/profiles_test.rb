@@ -5,7 +5,7 @@ require 'application_system_test_case'
 class ProfilesTest < ApplicationSystemTestCase
   setup do
     @user = users(:one)
-    @bulletin = bulletins(:one)
+    @bulletin = bulletins(:draft)
     sign_in @user
   end
 
@@ -37,15 +37,25 @@ class ProfilesTest < ApplicationSystemTestCase
   test 'search bulletin' do
     visit profile_path
 
-    fill_in(I18n.t('search_by_title'), with: @bulletin.title)
+    fill_in('q_title_cont', with: @bulletin.title)
     click_button I18n.t('search')
+
     assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+    @user.bulletins.each do |bulletin|
+      next if bulletin.id == @bulletin.id
+
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
 
     click_link I18n.t('reset')
     assert_current_path profile_path
 
-    select(@bulletin.aasm.human_state, from: I18n.t('search_by_status'))
+    select(@bulletin.aasm.human_state, from: 'q_state_eq')
     click_button I18n.t('search')
+
     assert page.has_link? @bulletin.title, href: bulletin_path(@bulletin)
+    @user.bulletins.where.not(state: @bulletin.state).each do |bulletin|
+      assert page.has_no_link? bulletin.title, href: bulletin_path(bulletin)
+    end
   end
 end

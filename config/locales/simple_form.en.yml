@@ -17,8 +17,12 @@ en:
       category:
         new:
           name: Name
+      q:
+        category_id_eq: Search by category
+        title_cont: Search bulletin by title
+        state_eq: Search by status
     hints:
-        q:
-          category_id_eq: Search by category
-          title_cont: Search bulletin by title
-          state_eq: Search by status
+      q:
+        category_id_eq: Search by category
+        title_cont: Search bulletin by title
+        state_eq: Search by status

@@ -8,7 +8,7 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in @admin
   end
 
-  test 'admin should get index' do
+  test 'admin should get categories page' do
     get admin_categories_path
 
     assert_response :success

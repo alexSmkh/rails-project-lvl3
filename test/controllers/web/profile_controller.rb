@@ -3,7 +3,7 @@
 class Web::ProfileControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
-    @bulletin = bulletins(:one)
+    @bulletin = bulletins(:draft)
     sign_in @user
   end
 

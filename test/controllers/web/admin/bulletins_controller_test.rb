@@ -3,13 +3,12 @@
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin = users(:admin)
-    @bulletin = bulletins(:one)
-    @bulletin.moderate!
+    @bulletin = bulletins(:under_moderation)
     sign_in @admin
   end
 
-  test 'admin should get index' do
-    get admin_categories_path
+  test 'admin should get the bulletins page' do
+    get admin_bulletins_path
     assert_response :success
   end
 
@@ -18,11 +17,6 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_nil Bulletin.find_by(id: @bulletin.id)
     assert_redirected_to admin_bulletins_path
-  end
-
-  test 'admin should get moderation' do
-    get admin_root_path
-    assert_response :success
   end
 
   test 'admin should reject bulletin' do
