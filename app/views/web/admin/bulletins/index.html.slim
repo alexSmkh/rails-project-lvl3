@@ -2,22 +2,10 @@
   h1 = t('bulletins')
   hr
 
+  = render 'web/admin/shared/nav_tabs'
+
   .row.mb-3
     = render 'search', q: @q
-
-  .row.mb-3.align-items-center
-    .col.text-center
-        = link_to t('bulletin_moderation'),
-                  admin_root_path,
-                  class: 'nav-link'
-    .col.text-center.bg-primary.rounded
-      = link_to t('bulletins'),
-                  '#',
-                  class: 'nav-link text-light fw-bold'
-    .col.text-center
-        = link_to t('categories'),
-                  admin_categories_path,
-                  class: 'nav-link'
 
   .shadow.rounded.table-responsive.mb-4
     table.table.align-middle

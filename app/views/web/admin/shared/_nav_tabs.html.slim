@@ -1,0 +1,13 @@
+ul.nav.nav-pills.mb-3
+  li.nav-item.flex-grow-1.text-center
+    = link_to t('bulletin_moderation'),
+              admin_root_path,
+              class: "nav-link #{'active' if current_page?(admin_root_path)}"
+  li.nav-item.flex-grow-1.text-center
+    = link_to t('bulletins'),
+              admin_bulletins_path,
+              class: "nav-link #{'active' if current_page?(admin_bulletins_path)}"
+  li.nav-item.flex-grow-1.text-center
+    = link_to t('categories'),
+              admin_categories_path,
+              class: "nav-link #{'active' if current_page?(admin_categories_path)}"
