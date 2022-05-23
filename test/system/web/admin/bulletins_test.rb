@@ -18,7 +18,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
 
     assert page.has_link? I18n.t('bulletins'), href: '#'
     assert page.has_link? I18n.t('categories'), href: admin_categories_path
-    assert page.has_link? I18n.t('bulletin_moderation'), href: admin_moderation_path
+    assert page.has_link? I18n.t('bulletin_moderation'), href: admin_root_path
 
     assert page.has_selector? 'th',
                               text: I18n.t('web.admin.bulletins.index.title')
@@ -91,7 +91,7 @@ class Admin::BulletinsTest < ApplicationSystemTestCase
   end
 
   test 'visit moderation page' do
-    visit admin_moderation_path
+    visit admin_root_path
 
     assert page.has_link? I18n.t('bulletins'), href: admin_bulletins_path
     assert page.has_link? I18n.t('categories'), href: admin_categories_path

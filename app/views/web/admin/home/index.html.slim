@@ -2,20 +2,18 @@ h1 = t('.bulletins_in_moderation')
 hr
 .container
   .row.mb-3.align-items-center
-    .col.text-center
-      = link_to t('bulletins'),
-                  admin_bulletins_path,
-                  class: 'nav-link'
-
-    .col.text-center
-        = link_to t('categories'),
-                  admin_categories_path,
-                  class: 'nav-link'
-
     .col.text-center.bg-primary.rounded
         = link_to t('bulletin_moderation'),
                   '#',
                   class: 'nav-link text-light fw-bold'
+    .col.text-center
+      = link_to t('bulletins'),
+                  admin_bulletins_path,
+                  class: 'nav-link'
+    .col.text-center
+        = link_to t('categories'),
+                  admin_categories_path,
+                  class: 'nav-link'
 
   .shadow.rounded.overflow-hidden.mb-4
     table.table.align-middle

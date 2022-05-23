@@ -21,7 +21,7 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should get moderation' do
-    get admin_moderation_path
+    get admin_root_path
     assert_response :success
   end
 

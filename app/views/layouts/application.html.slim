@@ -48,7 +48,7 @@ html
                       = t('profile')
                   - if current_user.admin?
                     li.py-1
-                      = link_to admin_bulletins_path, class: 'dropdown-item text-secondary rounded' do
+                      = link_to admin_root_path, class: 'dropdown-item text-secondary rounded' do
                         i.fa-solid.fa-lock.me-2
                         span = t('admin')
                   li.py-1

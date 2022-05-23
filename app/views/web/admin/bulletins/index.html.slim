@@ -6,19 +6,17 @@
     = render 'search'
 
   .row.mb-3.align-items-center
+    .col.text-center
+        = link_to t('bulletin_moderation'),
+                  admin_root_path,
+                  class: 'nav-link'
     .col.text-center.bg-primary.rounded
       = link_to t('bulletins'),
                   '#',
                   class: 'nav-link text-light fw-bold'
-
     .col.text-center
         = link_to t('categories'),
                   admin_categories_path,
-                  class: 'nav-link'
-
-    .col.text-center
-        = link_to t('bulletin_moderation'),
-                  admin_moderation_path,
                   class: 'nav-link'
 
   .shadow.rounded.table-responsive.mb-4

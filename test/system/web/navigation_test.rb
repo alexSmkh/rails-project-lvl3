@@ -43,7 +43,7 @@ class BulletinsTest < ApplicationSystemTestCase
     click_button class: 'btn dropdown-toggle'
 
     assert page.has_link? I18n.t('profile'), href: profile_path
-    assert page.has_link? I18n.t('admin'), href: admin_bulletins_path
+    assert page.has_link? I18n.t('admin'), href: admin_root_path
     assert page.has_link? I18n.t('sign_out'), href: session_path
   end
 
@@ -81,7 +81,7 @@ class BulletinsTest < ApplicationSystemTestCase
     click_button class: 'btn dropdown-toggle'
     click_link I18n.t('admin')
 
-    assert_current_path admin_bulletins_path
+    assert_current_path admin_root_path
   end
 
   test 'should show the dialog for sign out' do

@@ -1,0 +1,10 @@
+en:
+  web:
+    admin:
+      home:
+          index:
+            actions: Actions
+            date: Creation date
+            title: Title
+            status: Status
+            bulletins_in_moderation: Bulletins in moderation

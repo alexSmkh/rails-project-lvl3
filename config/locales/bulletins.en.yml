@@ -37,12 +37,6 @@ en:
           status: Status
         destroy:
           successfully_destroyed: Bulletin was successfully destroyed
-        moderation:
-          actions: Actions
-          date: Creation date
-          title: Title
-          status: Status
-          bulletins_in_moderation: Bulletins in moderation
         publish:
           success: The bulletin has been successfully published
           failed: The bulletin was not published. Please try again
@@ -55,6 +49,4 @@ en:
         moderate:
           success: The bulletin has been successfully sent for moderation
           failed: The bulletin was not sent for moderation. Please try again
-
-
 

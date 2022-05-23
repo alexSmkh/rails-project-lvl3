@@ -17,13 +17,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
                   notice: t('.successfully_destroyed')
   end
 
-  def moderation
-    authorize Bulletin, policy_class: Admin::BulletinPolicy
-
-    @q = Bulletin.where(state: Bulletin::STATE_UNDER_MODERATION.to_s).order(created_at: :desc).ransack(params[:q])
-    @bulletins = @q.result.page(params[:page])
-  end
-
   def archive
     bulletin = Bulletin.find(params[:id])
     authorize bulletin, policy_class: Admin::BulletinPolicy

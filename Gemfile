@@ -40,6 +40,7 @@ end
 group :development do
   gem 'bullet'
   gem 'html2slim', '~> 0.2.0'
+  gem 'i18n-debug'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
