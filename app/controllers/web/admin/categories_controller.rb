@@ -4,8 +4,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   before_action :authorize_admin
 
   def index
-    @q = Category.order(:name).ransack(params[:q])
-    @categories = @q.result.page(params[:page])
+    @categories = Category.order(:name).page(params[:page])
   end
 
   def new
