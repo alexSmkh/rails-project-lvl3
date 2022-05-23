@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     resource :session, only: %i[new destroy]
 
     resources :bulletins do
-      patch 'archive', on: :member
-      patch 'moderate', on: :member
+      member do
+        patch 'archive'
+        patch 'moderate'
+      end
     end
 
     resource :profile
@@ -17,9 +19,11 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :categories, except: :show
       resources :bulletins, only: %i[index destroy] do
-        patch 'archive', on: :member
-        patch 'reject', on: :member
-        patch 'publish', on: :member
+        member do
+          patch 'archive'
+          patch 'reject'
+          patch 'publish'
+        end
       end
       get 'moderation', to: 'bulletins#moderation', as: 'moderation'
     end
