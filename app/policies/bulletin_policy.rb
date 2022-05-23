@@ -2,9 +2,9 @@
 
 class BulletinPolicy < ApplicationPolicy
   def show?
-    return true if record.aasm.current_state == Bulletin::STATE_PUBLISHED
+    return true if record.published?
 
-    record.user_id == user&.id || user&.admin?
+    creator_or_admin?
   end
 
   def create?
@@ -12,18 +12,28 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user_id == user&.id || user&.admin?
+    creator_or_admin?
   end
 
   def destroy?
-    record.user_id == user&.id || user&.admin?
+    creator_or_admin?
   end
 
   def moderate?
-    record.user_id == user&.id
+    creator?
   end
 
   def archive?
+    creator?
+  end
+
+  private
+
+  def creator?
     record.user_id == user&.id
+  end
+
+  def creator_or_admin?
+    creator? || user&.admin?
   end
 end

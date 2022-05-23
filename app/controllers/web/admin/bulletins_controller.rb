@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
+  before_action :authorize_admin
+
   def index
-    authorize Bulletin, policy_class: Admin::BulletinPolicy
     @q = Bulletin.order(created_at: :desc).ransack(params[:q])
     @bulletins = @q.result.page(params[:page])
     @states = Bulletin.aasm.states.map { |state| [state.human_name, state] }
@@ -10,7 +11,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def destroy
     @bulletin = Bulletin.find(params[:id])
-    authorize @bulletin, policy_class: Admin::BulletinPolicy
     @bulletin.destroy
 
     redirect_back fallback_location: admin_bulletins_path,
@@ -19,7 +19,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def archive
     bulletin = Bulletin.find(params[:id])
-    authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.archive!
       redirect_back fallback_location: admin_bulletins_path, notice: t('.success')
@@ -30,7 +29,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def reject
     bulletin = Bulletin.find(params[:id])
-    authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.reject!
       redirect_back fallback_location: admin_bulletins_path, notice: t('.success')
@@ -41,7 +39,6 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def publish
     bulletin = Bulletin.find(params[:id])
-    authorize bulletin, policy_class: Admin::BulletinPolicy
 
     if bulletin.publish!
       redirect_back fallback_location: admin_bulletins_path, notice: t('.success')

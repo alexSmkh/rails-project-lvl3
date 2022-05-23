@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Profile::BulletinPolicy < ApplicationPolicy
+class ProfilePolicy < ApplicationPolicy
   def show?
     user
   end
