@@ -12,7 +12,7 @@
             span.align-middle = t('create_bulletin')
     - else
       .col.mb-3
-        = render 'search'
+        = render 'search', q: @q
       .row
         - @bulletins.each do |bulletin|
           = render 'bulletin_card', bulletin: bulletin
