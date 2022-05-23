@@ -23,7 +23,7 @@
             td.text-center
               = time_ago_in_words(bulletin.created_at)
             td.text-center
-              - if [Bulletin::STATE_DRAFT, Bulletin::STATE_REJECTED].include?(bulletin.aasm.current_state)
+              - if bulletin.may_moderate?
                 = link_to moderate_bulletin_path(bulletin),
                           method: :patch,
                           'data-bs-toggle': 'tooltip',
@@ -50,7 +50,7 @@
                 span.badge.bg-danger
                   i.fa-solid.fa-trash
 
-              - unless bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED
+              - if bulletin.may_archive?
                 = link_to archive_bulletin_path(bulletin),
                           method: :patch,
                           class: 'ms-1',

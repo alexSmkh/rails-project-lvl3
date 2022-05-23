@@ -56,7 +56,7 @@
                 span.badge.bg-danger
                   i.fa-solid.fa-trash
 
-              - unless bulletin.state == 'archived'
+              - if bulletin.may_archive?
                 = link_to archive_admin_bulletin_path(bulletin),
                           method: :patch,
                           class: 'ms-1',
