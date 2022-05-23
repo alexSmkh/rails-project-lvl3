@@ -17,8 +17,7 @@
           tr
             td
               = link_to bulletin.title,
-                        bulletin_path(bulletin),
-                        class: 'x-text-underline-hover'
+                        bulletin_path(bulletin)
             td.text-center
               = build_state_badge(bulletin)
             td.text-center
@@ -30,7 +29,7 @@
                           'data-bs-toggle': 'tooltip',
                           'data-bs-placement': 'top',
                           title: Bulletin.aasm.human_event_name(:moderate) do
-                  span.badge.x-badge-info
+                  span.badge.bg-info
                     i.fa-solid.fa-dragon
 
               = link_to edit_bulletin_path(bulletin),
@@ -38,7 +37,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
-                span.badge.x-badge-secondary
+                span.badge.bg-secondary
                   i.fa-solid.fa-pen-to-square
 
               = link_to bulletin_path(bulletin),
@@ -48,7 +47,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('delete') do
-                span.badge.x-badge-danger
+                span.badge.bg-danger
                   i.fa-solid.fa-trash
 
               - unless bulletin.aasm.current_state == Bulletin::STATE_ARCHIVED
@@ -58,7 +57,7 @@
                           'data-bs-toggle': 'tooltip',
                           'data-bs-placement': 'top',
                           title: Bulletin.aasm.human_event_name(:archive) do
-                  span.badge.x-badge-warning
+                  span.badge.bg-warning
                     i.fa-solid.fa-box-archive
 
   = paginate @bulletins,

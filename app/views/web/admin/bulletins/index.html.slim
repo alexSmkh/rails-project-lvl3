@@ -35,7 +35,7 @@
             td
               = link_to bulletin.title,
                         bulletin_path(bulletin),
-                        class: 'x-text-underline-hover'
+                        class: 'text-decoration-none'
             td.text-center
               = build_state_badge(bulletin)
             td.text-center
@@ -45,7 +45,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
-                span.badge.x-badge-secondary
+                span.badge.bg-secondary
                   i.fa-solid.fa-pen-to-square
 
               = link_to admin_bulletin_path(bulletin),
@@ -55,7 +55,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('delete') do
-                span.badge.x-badge-danger
+                span.badge.bg-danger
                   i.fa-solid.fa-trash
 
               - unless bulletin.state == 'archived'
@@ -65,7 +65,7 @@
                           'data-bs-toggle': 'tooltip',
                           'data-bs-placement': 'top',
                           title: Bulletin.aasm.human_event_name(:archive) do
-                  span.badge.x-badge-warning
+                  span.badge.bg-warning
                     i.fa-solid.fa-box-archive
 
   div

@@ -23,7 +23,7 @@
       thead
         tr
           th.ps-3 = t('.id')
-          th.text-center = t('.name')
+          th = t('.name')
           th.text-center = t('.actions')
       tbody
         tr
@@ -36,7 +36,7 @@
           tr
             td.ps-3
               = category.id
-            td.text-center
+            td
               = category.name
             td.text-center
               = link_to edit_admin_category_path(category),
@@ -44,7 +44,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('edit') do
-                span.badge.x-badge-secondary
+                span.badge.bg-secondary
                   i.fa-solid.fa-pen-to-square
 
               = link_to admin_category_path(category),
@@ -54,7 +54,7 @@
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: t('delete') do
-                span.badge.x-badge-danger
+                span.badge.bg-danger
                   i.fa-solid.fa-trash
 
   div

@@ -31,7 +31,7 @@ hr
             td
               = link_to bulletin.title,
                         bulletin_path(bulletin),
-                        class: 'x-text-underline-hover'
+                        class: 'text-decoration-none'
             td.text-center
               = build_state_badge(bulletin)
             td.text-center
@@ -42,7 +42,7 @@ hr
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: Bulletin.aasm.human_event_name(:publish) do
-                span.badge.x-badge-success
+                span.badge.bg-success
                   i.fa-solid.fa-check
 
               = link_to reject_admin_bulletin_path(bulletin),
@@ -51,7 +51,7 @@ hr
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: Bulletin.aasm.human_event_name(:reject) do
-                span.badge.x-badge-danger
+                span.badge.bg-danger
                   i.fa-solid.fa-ban
 
               = link_to archive_admin_bulletin_path(bulletin),
@@ -60,7 +60,7 @@ hr
                         'data-bs-toggle': 'tooltip',
                         'data-bs-placement': 'top',
                         title: Bulletin.aasm.human_event_name(:archive) do
-                span.badge.x-badge-warning
+                span.badge.bg-warning
                   i.fa-solid.fa-box-archive
 
   = paginate @bulletins,
