@@ -13,11 +13,11 @@ module BulletinsHelper
 
   def build_state_badge(bulletin)
     badges = {
-      draft: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-secondary') },
-      under_moderation: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-info') },
-      published: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-success') },
-      rejected: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-danger') },
-      archived: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge x-badge-warning') }
+      draft: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge bg-secondary') },
+      under_moderation: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge bg-info') },
+      published: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge bg-success') },
+      rejected: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge bg-danger') },
+      archived: -> { content_tag(:span, bulletin.aasm.human_state, class: 'badge bg-warning') }
     }
 
     badges[bulletin.aasm.current_state].call
