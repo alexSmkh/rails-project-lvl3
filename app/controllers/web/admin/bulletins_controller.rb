@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
-  before_action :authorize_admin
-
   def index
     @q = Bulletin.order(created_at: :desc).ransack(params[:q])
     @bulletins = @q.result.page(params[:page])

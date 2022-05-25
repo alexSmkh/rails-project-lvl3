@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Web::Admin::CategoriesController < Web::Admin::ApplicationController
-  before_action :authorize_admin
-
   def index
     @categories = Category.order(:name).page(params[:page])
   end
