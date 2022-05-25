@@ -4,14 +4,15 @@
       span.fs-6.badge.bg-warning = bulletin.category.name
 
     .col.text-end
-      - if signed_in? && policy(bulletin).edit?
-          = link_to edit_bulletin_path(bulletin), class: 'me-2' do
-            i.fa-solid.fa-pen-to-square.text-secondary
-      - if signed_in? && policy(bulletin).destroy?
-          = link_to bulletin_path(bulletin),
-                    method: :delete,
-                    data: { confirm: t('messages.are_you_sure') } do
-            i.fa-solid.fa-trash.text-secondary.ms-2
+      - if signed_in?
+        - if policy(bulletin).edit?
+            = link_to edit_bulletin_path(bulletin), class: 'me-2' do
+              i.fa-solid.fa-pen-to-square.text-secondary
+        - if policy(bulletin).destroy?
+            = link_to bulletin_path(bulletin),
+                      method: :delete,
+                      data: { confirm: t('messages.are_you_sure') } do
+              i.fa-solid.fa-trash.text-secondary.ms-2
 
   .row.mb-2
     .col
