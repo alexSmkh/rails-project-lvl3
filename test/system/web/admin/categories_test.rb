@@ -2,7 +2,7 @@
 
 require 'application_system_test_case'
 
-class Admin::CategoriesTest < ApplicationSystemTestCase
+class AdminCategoriesTest < ApplicationSystemTestCase
   setup do
     @admin = users(:admin)
     @first_category = categories(:one)

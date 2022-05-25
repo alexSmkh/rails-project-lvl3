@@ -2,7 +2,7 @@
 
 require 'application_system_test_case'
 # rubocop:disable Metrics/ClassLength
-class Admin::BulletinsTest < ApplicationSystemTestCase
+class AdminBulletinsTest < ApplicationSystemTestCase
   setup do
     @admin = users(:admin)
     @draft_bulletin = bulletins(:draft)
