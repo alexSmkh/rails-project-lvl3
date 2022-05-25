@@ -48,28 +48,19 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'user should update bulletin' do
-    updated_description = Faker::Lorem.paragraph(sentence_count: 5)
-    updated_title = Faker::Commerce.product_name.capitalize
-    category_id = categories(:two).id
+    edited_bulletin = {
+      description: Faker::Lorem.paragraph(sentence_count: 5),
+      title: Faker::Commerce.product_name,
+      category_id: categories(:two).id
+    }
 
-    patch bulletin_path(@bulletin),
-          params: {
-            bulletin: {
-              category_id: category_id,
-              description: updated_description,
-              title: updated_title
-            }
-          }
+    patch bulletin_path(@bulletin), params: { bulletin: edited_bulletin }
 
     assert_redirected_to bulletin_url(@bulletin)
 
     @bulletin.reload
 
-    updated_bulletin = Bulletin.find_by(
-      description: updated_description,
-      title: updated_title,
-      category_id: category_id
-    )
+    updated_bulletin = Bulletin.find_by(edited_bulletin.except(:image))
 
     assert { @bulletin.id == updated_bulletin.id }
   end

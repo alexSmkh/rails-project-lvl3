@@ -37,13 +37,18 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should update category' do
-    name = Faker::Commerce.department(max: 1)
+    edited_category = {
+      name: Faker::Commerce.department(max: 1)
+    }
 
-    patch admin_category_path(@category), params: { category: { name: name } }
+    patch admin_category_path(@category),
+          params: { category: edited_category }
 
     @category.reload
 
-    assert { @category.name == name }
+    updated_category = Category.find_by(edited_category)
+
+    assert { updated_category.name == @category.name }
     assert_redirected_to admin_categories_path
   end
 
