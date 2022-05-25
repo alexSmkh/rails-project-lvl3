@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :profile
+    resource :profile, only: :show
 
     namespace :admin do
       root 'home#index'
