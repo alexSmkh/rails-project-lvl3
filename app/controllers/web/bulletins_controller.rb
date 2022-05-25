@@ -10,7 +10,8 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def show
-    @bulletin = authorize Bulletin.find(params[:id])
+    @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin
   end
 
   def new
@@ -30,7 +31,8 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def edit
-    @bulletin = authorize current_user.bulletins.find(params[:id])
+    @bulletin = current_user.bulletins.find(params[:id])
+    authorize @bulletin
   end
 
   def update
@@ -45,7 +47,8 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def destroy
-    @bulletin = authorize current_user.bulletins.find(params[:id])
+    @bulletin = current_user.bulletins.find(params[:id])
+    authorize @bulletin
     @bulletin.destroy
 
     redirect_to root_path, notice: t('.successfully_destroyed')
