@@ -31,12 +31,12 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def edit
-    @bulletin = current_user.bulletins.find(params[:id])
+    @bulletin = Bulletin.find(params[:id])
     authorize @bulletin
   end
 
   def update
-    @bulletin = current_user.bulletins.find(params[:id])
+    @bulletin = Bulletin.find(params[:id])
     authorize @bulletin
 
     if @bulletin.update(bulletin_params)
@@ -47,7 +47,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   def destroy
-    @bulletin = current_user.bulletins.find(params[:id])
+    @bulletin = Bulletin.find(params[:id])
     authorize @bulletin
     @bulletin.destroy
 
