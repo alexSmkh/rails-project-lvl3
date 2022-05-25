@@ -7,6 +7,10 @@
     = f.input :description, as: :text
   .mb-3
     = f.association :category
+
+  - if bulletin.image.attached?
+    = image_tag bulletin.image
+
   .mb-5
     = f.input :image, as: :file, input_html: { class: 'form-control' }
   .mb-3
