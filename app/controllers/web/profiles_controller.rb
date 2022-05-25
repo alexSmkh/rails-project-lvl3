@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Web::ProfilesController < Web::ApplicationController
+  before_action :auth_user!
+
   def show
     authorize :profile
     @q = current_user.bulletins.ransack(params[:q])

@@ -2,6 +2,6 @@
 
 class ProfilePolicy < ApplicationPolicy
   def show?
-    user
+    true
   end
 end

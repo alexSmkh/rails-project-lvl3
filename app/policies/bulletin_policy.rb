@@ -8,7 +8,7 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    true
   end
 
   def update?
@@ -30,10 +30,10 @@ class BulletinPolicy < ApplicationPolicy
   private
 
   def creator?
-    record.user_id == user&.id
+    record.user_id == user.id
   end
 
   def creator_or_admin?
-    creator? || user&.admin?
+    creator? || user.admin?
   end
 end

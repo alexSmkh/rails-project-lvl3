@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Web::BulletinsController < Web::ApplicationController
+  before_action :auth_user!, only: %i[new create edit update destroy]
+
   def index
     @q = Bulletin.published.order(created_at: :desc).ransack(params[:q])
     @categories = Category.order(name: :asc)
