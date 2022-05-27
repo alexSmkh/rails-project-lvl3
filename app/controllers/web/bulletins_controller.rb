@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Web::BulletinsController < Web::ApplicationController
-  before_action :auth_user!, only: %i[new create edit update destroy]
+  before_action :auth_user!, only: %i[new create edit update destroy moderate archive]
 
   def index
     @q = Bulletin.published.order(created_at: :desc).ransack(params[:q])

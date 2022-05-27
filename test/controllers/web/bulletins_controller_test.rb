@@ -16,6 +16,12 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should show bulletin' do
+    get bulletin_url(@bulletin)
+
+    assert_response :success
+  end
+
   test 'user should get new' do
     get new_bulletin_url
     assert_response :success
@@ -35,11 +41,6 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to bulletin_path(new_bulletin)
     assert { new_bulletin }
-  end
-
-  test 'should show bulletin' do
-    get bulletin_url(@bulletin)
-    assert_response :success
   end
 
   test 'user should get edit' do
@@ -91,9 +92,7 @@ class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'search bulletin' do
-    get bulletins_path, params: {
-      q: @bulletin.title
-    }
+    get bulletins_path, params: { q: @bulletin.title }
 
     assert_response :success
   end
