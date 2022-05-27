@@ -11,6 +11,12 @@ class Web::BulletinsController < Web::ApplicationController
 
   def show
     @bulletin = Bulletin.find(params[:id])
+
+    if !signed_in? && !@bulletin.published?
+      redirect_back fallback_location: root_path, alert: t('.you_can_not_view')
+      return
+    end
+
     authorize @bulletin
   end
 
